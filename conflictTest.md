@@ -1,3 +1,3 @@
 # Hi there! I'm adam!
 
-This is a gitHub edit
+This is not from gitHub
