@@ -1,4 +1,4 @@
 # startup
 CS 260 Startup
 
-## Notes: [CLick here](notes.md)
+## Notes found (here](notes.md)
