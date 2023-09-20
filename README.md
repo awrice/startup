@@ -9,10 +9,10 @@ Rental cars are too expensive! Pockettowns is a new way of getting your hands on
 ## Mock Up
 Main Page Design of the web application
 <div style="display: inline-block">
-    <img style="float: left; height: 400pt" src="mockImages/SignUp.png" />
-    <img style="float: left; height: 400pt" src="mockImages/RegisterCar.png" />
-    <img style="float: left; height: 400pt" src="mockImages/AvailableListings.png" />
-    <img style="float: left; height: 400pt" src="mockImages/RentalHistory.png" />
+    <img style="float: left; height: 200pt" src="mockImages/SignUp.png" />
+    <img style="float: left; height: 200pt" src="mockImages/RegisterCar.png" />
+    <img style="float: left; height: 200pt" src="mockImages/AvailableListings.png" />
+    <img style="float: left; height: 200pt" src="mockImages/RentalHistory.png" />
 </div>
 
 This is the sequence diagram of how the different users communicate with the server
