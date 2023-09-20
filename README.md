@@ -15,9 +15,26 @@ Main Page Design of the web application
 </div>
 
 This is the sequence diagram of how the different users communicate with the server
-<div style="display: block">
-    <img style="float: left; height: 400pt" src="mockImages/_server_diagram.png" />
-</div>
+<img style="height: 400pt" src="mockImages/_server_diagram.png" />>
 
 ## Key Features
+* Secure login over HTTPS
+* Extracts and Displays data about available cars around your area
+* Registration of a car for possible travelers in your area
+* Real time communication with a booked renter
+* Ratings of all the renters and of the cars as they are rented
 
+## Technologies
+I will use the required technologies in the following ways
+* **HTML** - There are four HTML pages in this application: Sign up/Login, Car Registering, Available Listings, & Car rental History
+* **CSS** - The pages will all be styled using CSS to make sure that the application looks good on all sizes of device.
+* **JavaScript** - Displays all the available listings recieved from the backend, as well as all the user data. Also provides the login capabilities
+* **Service** - There will be backend endpoints for
+    * Logging in
+    * Available Listings Retrieval
+    * Car Registration
+    * Account Info Retrieval
+* **DB** - We will store the account data for each account in a database in the cloud (username, password, history, location, cars registered)
+* **Login** - Each user will have to login with their own unique credentials stored in the cloud.
+* **Web Socket** - When a car in rented, the renter will be connected to the vehicle owner
+* **React** - Application will later be based on React
