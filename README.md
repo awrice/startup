@@ -15,7 +15,7 @@ Main Page Design of the web application
 </div>
 
 This is the sequence diagram of how the different users communicate with the server
-<img style="height: 400pt" src="mockImages/_server_diagram.png" />>
+<img style="height: 400pt" src="mockImages/_server_diagram.png" />
 
 ## Key Features
 * Secure login over HTTPS
