@@ -12,6 +12,7 @@ Main Page Design of the web application
     <img style="float: left; height: 400pt" src="mockImages/SignUp.png" />
     <img style="float: left; height: 400pt" src="mockImages/RegisterCar.png" />
     <img style="float: left; height: 400pt" src="mockImages/AvailableListings.png" />
+    <img style="float: left; height: 400pt" src="mockImages/RentalHistory.png" />
 </div>
 
 This is the sequence diagram of how the different users communicate with the server
