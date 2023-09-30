@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pocket Towns</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <header>
+      <h1>Pocket Towns</h1>
+    </header>
+    
+    <!-- Navigation elements -->
+    <nav>
+      <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+      <menu>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="listings.html">Listings</a></li>
+        <li><a href="register.html">Register Your Car</a></li>
+        <li><a href="pastRentals.html">Past Rentals</a></li>
+      </menu>
+    </nav>
+    <hr />
+
+    <main>
+        <label for="search">Search: </label>
+        <input type="search" id="search" name="varSearch" />
+        <h1>Available Listings</h1>
+        <label for="sortBy">Sort by </label>
+        <select id="sortBy" name="varSelect">
+          <option selected>Price</option>
+          <option>Make/Model</option>
+          <option>Location</option>
+        </select>
+        <ul>
+            <li>
+                <img src="images/camry.png" width=100/>
+                <h2>Toyota Camry</h2>
+                <p>260 N 700 E</p>
+                <h3>$30/day</h3>
+            </li>
+            <li>
+                <img src="images/camry.png" width=100/>
+                <h2>Honda CRV</h2>
+                <p>782 N 750 E</p>
+                <h3>$25/day</h3>
+            </li>
+            <li>
+                <img src="images/camry.png" width=100/>
+                <h2>Nissan Versa</h2>
+                <p>1803 Meadowlane</p>
+                <h3>$33/day</h3>
+            </li>
+        </ul>
+    </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Adam Rice</span>
+      <br />
+      <a href="https://github.com/awrice/startup">GitHub</a>
+    </footer>
+  </body>
+</html>
