@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pocket Towns</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <header>
+      <h1>Pocket Towns</h1>
+    </header>
+    
+    <!-- Navigation elements -->
+    <nav>
+      <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+      <menu>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="listings.html">Listings</a></li>
+        <li><a href="register.html">Register Your Car</a></li>
+        <li><a href="pastRentals.html">Past Rentals</a></li>
+        <li><a href="messages.html">Messages</a></li>
+      </menu>
+    </nav>
+    <hr />
+
+    <main>
+        <h1>Messaging</h1>
+        <p>You'll see messages with your renters/vehicle owners here</p>
+
+        <label for="thread">Thread Selection</label>
+        <select id="thread" name="thread">
+          <option>Berrett Norton</option>
+          <option selected>Lilian Davis</option>
+          <option>Tina Adams</option>
+        </select>
+
+        <div id="messages">
+            <ul>
+                <li>
+                    <small>You <span><i>Jan 3, 4:15</i></span></small>
+                    <h3>Hey! Excited to rent my camry you! Let me know your details so I can get the keys to you</h3>
+                </li>
+                <li>
+                    <small>Lilian Davis <span><i>Jan 3, 4:19</i></span></small>
+                    <h3>Awesome thanks! Should be landing around 1.</h3>
+                </li>
+                <li>
+                    <small>You <span><i>Jan 3, 4:29</i></span></small>
+                    <h3>Perfect. I'll be ready around then.</h3>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Adam Rice</span>
+      <br />
+      <a href="https://github.com/awrice/startup">GitHub</a>
+    </footer>
+  </body>
+</html>
