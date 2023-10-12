@@ -5,62 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pocket Towns</title>
     <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="style1.css">
   </head>
   <body>
     <header>
       <h1>Pocket Towns</h1>
-    </header>
     
-    <!-- Navigation elements -->
-    <nav>
-      <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
-      <menu>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="listings.html">Listings</a></li>
-        <li><a href="register.html">Register Your Car</a></li>
-        <li><a href="pastRentals.html">Past Rentals</a></li>
-        <li><a href="messages.html">Messages</a></li>
-      </menu>
-    </nav>
-    <hr />
+      <!-- Navigation elements -->
+      <nav>
+        <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="listings.html">Listings</a></li>
+          <li><a href="register.html">Register Your Service</a></li>
+          <li><a href="pastRentals.html">Past Services</a></li>
+          <li><a href="messages.html">Messages</a></li>
+        </menu>
+      </nav>
+    </header>
 
     <main>
-        <h1>Register Your Car</h1>
-        <form method="get" action="play.html">
-            <ul style="list-style-type:none;">
-                <li>
-                    <label for="make">Make: </label>
-                    <input type="text" id="make" name="make" placeholder="Nissan" required />
-                </li>
-                <li>
-                    <label for="model">Model: </label>
-                    <input type="text" id="model" name="model" placeholder="Versa" required />
-                </li>
-                <li>
-                    <label for="year">Year: </label>
-                    <input type="number" name="year" min="1900" max="2099" step="1" value="2016" required />
-                </li>
-                <li>
-                    <label for="pickup">Pick up renters</label>
-                    <input type="checkbox" id="pickup" name="pickup" value="pickup" />
-                </li>
-                <li>
-                    <label for="images">Upload any images of your car: </label>
-                    <input type="file" id="images" name="images" accept="image/*" multiple />            
-                </li>
-                <li>
-                    <label for="additionalNotes">Notes about your vehicle </label>
-                    <textarea id="additionalNotes" name="additionalNotes"></textarea>
-                </li>
-            </ul>
-            <button type="submit">Register</button>
-        </form>
+      <h1>Register Your Service</h1>
+      <form method="get" action="listings.html" id="registerForm">
+        <ul style="list-style-type:none;">
+          <li>
+            <label for="title">Service Title</label>
+            <input type="text" id="title" name="title" placeholder="Hiking Gear" required />
+          </li>
+          <li>
+            <label for="descirption">Descirption</label>
+            <textarea id="descirption" name="descirption"  ></textarea>
+          </li>
+          <li>
+            <label for="images">Images associated with your service</label>
+            <input type="file" id="images" name="images" accept="image/*" multiple />
+          </li>
+        </ul>
+        <button type="submit">Register</button>
+      </form>
     </main>
 
     <footer>
-      <hr />
       <span class="text-reset">Adam Rice</span>
-      <br />
       <a href="https://github.com/awrice/startup">GitHub</a>
     </footer>
   </body>

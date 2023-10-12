@@ -1,0 +1,97 @@
+* {
+    font-family: Arial;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    height: 100vh;
+}
+
+header {
+    padding: 10pt;
+    flex: 0 50pt;
+    background-color: #eeffff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+}
+header > h1 {
+    margin: 5pt;
+    font-size: large;
+}
+menu > li {
+    display: inline-block;
+    /* padding: 5pt; */
+    list-style-type: none;
+}
+menu > li > a {
+    color: #3355ff;
+    text-decoration: none;
+    padding: 5pt;
+    transition: 0.25s;
+}
+menu > li > a:hover {
+    border-bottom: 2pt solid #3355ff;
+}
+
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 40pt;
+    /* align-items: center;
+    justify-content: center; */
+}
+div.welcome-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+div.welcome-screen > form {
+    /* border: 1pt solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 10pt; */
+
+}
+input[type=text], input[type=password], input[type=search] {
+    padding: 10pt;
+    margin: 10pt;
+    border-radius: 100pt;
+    border: 1pt solid #3355ff;
+    width: 30vw;
+}
+input[type=search] {
+    width: 100%;
+}
+button[type=submit] {
+    border: none;
+    padding: 10pt;
+    border-radius: 100pt;
+    transition: 0.25s;
+    width: 30vw;
+}
+button[type=submit]:hover {
+    background-color: #3355ff;
+    color: white;
+}
+
+
+
+footer {
+    color: #3355ff;
+    background-color: #eeffff;
+    padding: 5pt;
+    flex: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+footer > * {
+    padding: 10pt;
+}
