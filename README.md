@@ -39,3 +39,25 @@ I will use the required technologies in the following ways
 * **Login** - Each user will have to login with their own unique credentials stored in the cloud.
 * **Web Socket** - When a car in rented, the renter will be connected to the vehicle owner
 * **React** - Application will later be based on React
+
+
+## HTML Deliverable
+For this deliverable, I added these things to my startup
+* **HTML pages** - All the pages of the application are added using HTML code
+* **Links** - The links at the top of the page, as well as the link to my GitHub repository are functioning
+* **Mock Service Options** - There are mock services shown in the screens of the application
+* **Login** - Input boxes and submit button for login.
+* **Database** - There is user data and Service options that will be updated using the database
+* **WebSocket** - The realtime connection with the server will be done with the messaging page
+
+
+## CSS Updates (Due Oct 14th)
+I have changed some things about the way the app works. First and foremost, the app is no longer about cars, but instead about generic services that people can offer in the city they live in. Also, instead of a Messaging screen, I have created an Account settings screen. In this screen, we'll establish a web socket to give the user possible ideas of services to think about registering.
+
+For this deliverable, I made the application look better!
+* **Header, footer, and main content body**
+* **Navigation elements** - All the parts in the nav element look good, and show a bottom border when hovered over
+* **Responsive to window resizing** - As you make the window larger or smaller, the text fields and the placement of the elements shifts around
+* **Application elements** - There is a good understanding of what is the main body and what is the header and footer
+* **Application text content** - Everything is in Arial or Sans serif to give it a modernized, not-to-complex look
+* **Application images** - All the images are sized correctly and are shown in a stylized way
