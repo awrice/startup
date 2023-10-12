@@ -51,7 +51,7 @@ For this deliverable, I added these things to my startup
 * **WebSocket** - The realtime connection with the server will be done with the messaging page
 
 
-## CSS Updates (Due Oct 14th)
+## CSS Deliverable
 I have changed some things about the way the app works. First and foremost, the app is no longer about cars, but instead about generic services that people can offer in the city they live in. Also, instead of a Messaging screen, I have created an Account settings screen. In this screen, we'll establish a web socket to give the user possible ideas of services to think about registering.
 
 For this deliverable, I made the application look better!
