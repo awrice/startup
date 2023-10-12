@@ -24,8 +24,8 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* justify-content: center; */
     width: 100%;
+    min-height: 50pt;
 }
 header > h1 {
     margin: 5pt;
@@ -65,9 +65,9 @@ div.welcome-screen > form {
     flex-direction: column;
     align-items: center;
 }
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=tel] {
     padding: 10pt;
-    margin: 10pt;
+    /* margin: 10pt; */
     border-radius: 3pt;
     border: 1pt solid #ddd;
     width: 200pt;
@@ -110,6 +110,7 @@ ul li {
 label {
     font-weight: bold;
     display: block;
+    margin: 10pt 0;
 }
 textarea {
     padding: 10px;
@@ -125,9 +126,6 @@ textarea {
 h1 {
     font-size: 24px;
     margin-bottom: 10px;
-}
-label {
-    font-weight: bold;
 }
 select {
     padding: 5px;
@@ -147,6 +145,9 @@ ul li {
     background-color: #fff;
     border-radius: 5px;
     flex: 0 1 calc(33.33% - 20px);
+}
+ul li:hover {
+    border: 1px solid #aaa;
 }
 
 ul li img {
