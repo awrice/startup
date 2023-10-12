@@ -85,6 +85,7 @@ button[type=submit] {
     border-radius: 100pt;
     transition: 0.25s;
     width: 100pt;
+    margin-top: 10pt;
 }
 button[type=submit]:hover {
     background-color: #3355ff;
@@ -99,7 +100,7 @@ form {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-form#registerForm > ul {
+form.fullwidth > ul {
     display: flex;
     flex-direction: column;
 
