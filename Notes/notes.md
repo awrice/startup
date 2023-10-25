@@ -9,6 +9,184 @@ Using the `git clone [git repo URL]` command will give you a new copy of the rep
 #
 
 
+
+# The Console
+
+📖 **Deeper dive reading**: [MDN Command line crash course](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Command_line)
+
+Before the creation of graphical user interfaces, all computing systems were simple console environments consisting as of a prompt for inputting a command and the display of the command output. All of the original programming tools ran as console application. The console tradition is still actively used by professional developers and most programming tools execute within a console window.
+
+Also known as the command line, shell, or terminal, the console window is an essential web development tool. The console provides access to the file system and allows for the execution of command line applications.
+
+There are many console applications that you can chose from. All operating systems come with a default console, but you will probably want to install one in order to get the best experience.
+
+## Make sure you have a console application
+
+In order for you to successfully use the console for web programming it must be [POSIX](https://en.wikipedia.org/wiki/POSIX) compliant. POSIX compliance means that it supports a standard set of console commands. Both Mac and Linix support POSIX. That means any necessary console commands will work on those operating systems.
+
+### Testing your console application
+
+Once you have a acceptable console application on your development computer, open it up and make sure you can run a simple POSIX compliant command such as `printf 'hello\n'`.
+
+![Console printf](consolePrintf.jpg)
+
+If this displays `hello` then you are on the right track. If that doesn't work then you are using a console application that is not POSIX compliant. For example, Windows Powershell will not work.
+
+## Viewing the file system
+
+One of the primary purposes of a console application is to view the files on the computer. The files on a computer are organized into a tree structure of nodes called directories. At any given point in time your console is located at one of the directories in the file system. You can see which directory you are in with the `pwd` (present working directory) command.
+
+```sh
+➜  pwd
+
+/Users/student/byu//webprogramming260
+```
+
+You can list all of the files in the directory with `ls` (list files). Most command line applications take parameters that are specified after you type the application name. For example, `ls` can list all files (even hidden ones) in a long format if you provide the parameter `-la`.
+
+```sh
+➜ ls -la
+
+total 16
+-rw-r--r--  1 lee  staff   1.0K Nov 19 08:47 LICENSE
+-rw-r--r--  1 lee  staff    82B Nov 19 08:47 README.md
+drwxr-xr-x  4 lee  staff   128B Nov 19 08:48 profile
+drwxr-xr-x  4 lee  staff   128B Nov 19 08:47 react
+```
+
+## Executing commands
+
+The other primary purpose of the console is to execute commands. You already did this in the previous section when you executed commands for working with the file system. However, console commands can perform many different operations. Here are some basic commands that you show experiment with.
+
+- **echo** - Output the parameters of the command
+- **cd** - Change directory
+- **mkdir** - Make directory
+- **rmdir** - Remove directory
+- **rm** - Remove file(s)
+- **mv** - Move file(s)
+- **cp** - Copy files
+- **ls** - List files
+- **curl** - Command line client URL browser
+- **grep** - Regular expression search
+- **find** - Find files
+- **top** - View running processes with CPU and memory usage
+- **df** - View disk statistics
+- **cat** - Output the contents of a file
+- **less** - Interactively output the contents of a file
+- **wc** - Count the words in a file
+- **ps** - View the currently running processes
+- **kill** - Kill a currently running process
+- **sudo** - Execute a command as a super user (admin)
+- **ssh** - Create a secure shell on a remote computer
+- **scp** - Securely copy files to a remote computer
+- **history** - Show the history of commands
+- **ping** - Check if a website is up
+- **tracert** - Trace the connections to a website
+- **dig** - Show the DNS information for a domain
+- **man** - Look up a command in the manual
+- **chmod** - Change permissions for a file or directory on a Unix machine
+- **wget** - lets you download files and interact with REST APIs. It supports the HTTP , HTTPS , FTP , and FTPS internet protocols.
+
+You can also chain the input and output of commands using special characters
+
+- `|` - Take the output from the command on the left and _pipe_, or pass, it to the command on the right
+- `>` - Redirect output to a file. Overwrites the file if it exists
+- `>>` - Redirect output to a file. Appends if the file exists
+
+For example, you can list the files in a directory, pipe it into `grep` to search for files created in Nov, and then pipe that into `wc` to count the number of files found with a date of Nov.
+
+```
+ls -l | grep ' Nov ' | wc -l
+```
+
+There are also keystrokes that have special meaning in the console.
+
+- `CTRL-R` - Use type ahead to find previous commands
+- `CTRL-C` - Kill the currently running command
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# The internet
+
+📖 **Deeper dive reading**:
+
+- [MDN How does the Internet work?](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/How_does_the_Internet_work)
+- [YouTube The Internet in 5 Minutes](https://youtu.be/7_LPdttKXPc)
+
+The internet globally connects independent networks and computing devices. In a simplistic way, you can think of the internet as a massive redundant collection of wires that connect up all the computers in the world. A lot of those wires are wireless (wiFi, satellite, or cell), and not all of computers in the world are connected, but generally that is what the internet is. The deeper your mental model of the internet is, the more effectively you will be able to create web applications.
+
+![Internet connections](internetConnections.jpg)
+
+## Making connections
+
+When one device wants to talk to another it must have an IP address. For example, `128.187.16.184` is BYU's address. Usually, human users prefer a symbolic name over an IP address. The symbolic name is called a domain name. Domain names are converted to IP address by doing a lookup in the Domain Name System (DNS). You can look up the IP address for any domain name using the `dig` console utility.
+
+```sh
+➜  dig byu.edu
+
+byu.edu.		5755	IN	A	128.187.16.184
+```
+
+![Internet requests](internetRequests.jpg)
+
+Once you have the IP address, you connect to the device it represents by first asking for a connection route to the device. A connection route consists of many hops across the network until the destination is dynamically discovered and the connection established. With the connection the transport and application layers start exchanging data.
+
+### Traceroute
+
+You can determine the hops in a connection using the `traceroute` console utility. In the following example, we trace the route between a home computer and BYU. In the result you see the first address `192.168.1.1`. This is the address of the network router the home computer is connected to. From there it goes through a couple devices that do not identify themselves and then hits the Google Fiber gateway. Google Fiber is the internet service provider, or ISP, for the requesting device. Then we jump through a few more unidentified devices before finally arriving at BYU (`128.187.16.184`).
+
+```sh
+➜  traceroute byu.edu
+
+traceroute to byu.edu (128.187.16.184), 64 hops max, 52 byte packets
+ 1  192.168.1.1 (192.168.1.1)  10.942 ms  4.055 ms  4.694 ms
+ 2  * * *
+ 3  * * *
+ 4  192-119-18-212.mci.googlefiber.net (192.119.18.212)  5.369 ms  5.576 ms  6.456 ms
+ 5  216.21.171.197 (216.21.171.197)  6.283 ms  6.767 ms  5.532 ms
+ 6  * * *
+ 7  * * *
+ 8  * * *
+ 9  byu.com (128.187.16.184)  7.544 ms !X *  40.231 ms !X
+
+```
+
+If I run traceroute again I might see a slightly different route since every connection through the internet is dynamically calculated. The ability to discover a route makes the internet resilient when network devices fail or disappear from the network.
+
+## Network internals
+
+The actual sending of data across the internet uses the TCP/IP model. This is a layered architecture that covers everything from the physical wires to the data that a web application sends. At the top of the TCP/IP protocol is the application layer. It represents user functionality, such as the web (HTTP), mail (SMTP), files (FTP), remote shell (SSH), and chat (IRC). Underneath that is the transport layer which breaks the application layer's information into small chunks and sends the data. The actual connection is made using the internet layer. This finds the device you want to talk to and keeps the connection alive. Finally, at the bottom of the model is the link layer which deals with the physical connections and hardware.
+
+### [TCP/IP](https://en.wikipedia.org/wiki/Internet_protocol_suite) layers
+
+| Layer       | Example         | Purpose                               |
+| ----------- | --------------- | ------------------------------------- |
+| Application | HTTPS           | Functionality like web browsing       |
+| Transport   | TCP             | Moving connection information packets |
+| Internet    | IP              | Establishing connections              |
+| Link        | Fiber, hardware | Physical connections                  |
+
+
+
+
+
+
 # Web servers
 
 A web server is a computing device that is hosting a web service that knows how to accept incoming internet connections and speak the HTTP application protocol.
@@ -3026,10 +3204,19 @@ function getFullName(item) {
 
 
 ## Is a web certificate is necessary to use HTTPS.
+Yes
 
 
 
 ## Can a DNS A record can point to an IP address or another A record.
+A DNS A (Address) record is specifically used to map a domain or subdomain to an IPv4 address. It cannot point directly to another A record. An A record provides a direct mapping between a domain name and an IPv4 address, allowing web browsers and other applications to locate the correct IP address to reach the associated web server or service.
+
+If you want to create a chain or reference between DNS records, you would typically use other types of DNS records, such as CNAME (Canonical Name) records. A CNAME record allows one domain or subdomain to point to another domain or subdomain. This can be used to create aliases or to reference another hostname.
+
+For example, if you have two domains, "example.com" and "subdomain.example.com," and you want "subdomain.example.com" to resolve to the same IP address as "example.com," you can create a CNAME record for "subdomain.example.com" that points to "example.com."
+
+So, in summary, while A records are for mapping to IPv4 addresses, CNAME records are used for creating references or aliases between domain names.
+
 
 
 
