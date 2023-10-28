@@ -1,7 +1,6 @@
 function listingClicked(listing) {
-    console.log("LISTING!");
-    console.log(listing["name"]);
-    window.location = "/listing.html?listingId="+listing["id"];
+    if (window.location.pathname === "/services.html") { window.location = "/messaging.html?messageId=" + listing["owner_id"]; }
+    else { window.location = "/listing.html?listingId=" + listing["id"]; }
 }
 
 function createListing(listing) {
@@ -39,7 +38,7 @@ function createListing(listing) {
 
 function resetListings() {
     let searchQuery = null;
-    if (window.location.pathname === "/pastRentals.html") { searchQuery = "{PAST}"; }
+    if (window.location.pathname === "/services.html") { searchQuery = "{PAST}"; }
     else {
         searchQuery = null;
     }

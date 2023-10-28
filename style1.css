@@ -122,6 +122,23 @@ textarea {
     font-family: Arial, Sans-serif;
     height: 300pt;
 }
+div#messagesDiv {
+    display: flex;
+    flex-direction: column;
+    margin: 10pt;
+}
+p.message {
+    width: 40vw;
+    padding: 10pt;
+    background-color: #eee;
+    margin: 10pt;
+    border-radius: 5pt;
+}
+p.message.me {
+    background-color: #3355ff;
+    color: white;
+    align-self: flex-end;
+}
 
 
 h1 {

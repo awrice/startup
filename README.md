@@ -64,6 +64,12 @@ For this deliverable, I made the application look better!
 
 
 ## Javascript Deliverable
+For this deliverable, I added the following JavaScript functionality:
+* **Support for Future Login**
+* **Support for a Database** - I used dummy data to be returned, but the database functions are now in place.
+* **Support for a future WebSocket** - The web socket will be used with the messaging between the service owner and the service user. (Not sure exactly how that is going to work yet, but the structure is as best I could do).
+
+
 (Required) Simon JavaScript deployed to your production environment
 (Required) A link to your GitHub startup repository prominently displayed on your application's home page
 (Required) Notes in your startup Git repository README.md file documenting what you modified and added with this deliverable

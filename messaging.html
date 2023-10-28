@@ -6,7 +6,6 @@
     <title>Pocket Towns</title>
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" href="style1.css">
-    <script src="js/login.js"></script>
   </head>
   <body>
     <header>
@@ -26,20 +25,9 @@
     </header>
 
     <main>
-      <div class="welcome-screen">
-        <h1>Login</h1>
-        <form method="get" action="listings.html">
-          <div>
-            <label for="name"></label>
-            <input type="text" id="name" placeholder="username" />
-          </div>
-          <div>
-            <label for="password"></label>
-            <input type="password" id="password" name="varPassword" placeholder="password" />
-          </div>
-          <button type="submit" onclick="login()">Login</button>
-        </form>
-      </div>
+        <h1 id="title"></h1>
+        <div id="messagesDiv"></div>
+        <input type="text" id="newMessage" name="newMessage" placeholder="Aa"/>
     </main>
 
     <footer>
@@ -47,4 +35,7 @@
       <a href="https://github.com/awrice/startup">GitHub</a>
     </footer>
   </body>
+
+  <script src="js/backend.js"></script>
+  <script src="js/messaging.js"></script>
 </html>
