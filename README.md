@@ -68,16 +68,6 @@ For this deliverable, I added the following JavaScript functionality:
 * **Support for Future Login**
 * **Support for a Database** - I used dummy data to be returned, but the database functions are now in place.
 * **Support for a future WebSocket** - The web socket will be used with the messaging between the service owner and the service user. (Not sure exactly how that is going to work yet, but the structure is as best I could do).
-
-
-(Required) Simon JavaScript deployed to your production environment
-(Required) A link to your GitHub startup repository prominently displayed on your application's home page
-(Required) Notes in your startup Git repository README.md file documenting what you modified and added with this deliverable
-Significant use of JavaScript to create a viable working application
-20% JavaScript support for future login.
-20% JavaScript support for future database data.
-20% JavaScript support for future WebSocket.
-30% JavaScript support for your application's interaction logic.
-10% - Multiple Git commits with meaningful comments.
+* **Application is Interactive** - all the sorting dropdowns now work, and going from one place to another is working as intended.
 
 
