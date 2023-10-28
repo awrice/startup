@@ -27,27 +27,16 @@
     <main>
         <!-- <label for="search">Search: </label> -->
         <input type="search" id="search" name="varSearch" placeholder="Search"/>
-        <h1>Available Listings</h1>
-        <label for="sortBy">Sort by </label>
-        <select id="sortBy" name="varSelect" onchange="resetListings()">
-          <option value="rate" selected>Price</option>
-          <option value="name">Name</option>
-          <option value="location">Location</option>
-        </select>
-        <ul id="listingsOL">
-            <!-- <li>
-                <img src="images/camry.png" width=100/>
-                <h2>Honda CRV</h2>
-                <p>782 N 750 E</p>
-                <h3>$25/day</h3>
-            </li>
-            <li>
-                <img src="images/camry.png" width=100/>
-                <h2>Nissan Versa</h2>
-                <p>1803 Meadowlane</p>
-                <h3>$33/day</h3>
-            </li> -->
-        </ul>
+        <!-- <h1>Available Listings</h1> -->
+        <div>
+            <div id="listingSelected">
+                <img id="image" />
+                <h1 id="name"></h1>
+                <h3 id="location"></h3>
+                <p id="description"></p>
+            </div>
+            <button onclick="sendInterest()">I'm interested!</button>
+        </div>
     </main>
 
     <footer>
@@ -57,5 +46,5 @@
   </body>
 
   <script src="js/backend.js"></script>
-  <script src="js/listings.js"></script>
+  <script src="js/listing.js"></script>
 </html>

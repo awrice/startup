@@ -33,7 +33,7 @@ header > h1 {
 }
 menu > li {
     display: inline-block;
-    /* padding: 5pt; */
+    padding: 0 5pt;
     list-style-type: none;
 }
 menu > li > a {
@@ -177,6 +177,11 @@ footer > * {
 @media (max-width: 768px) {
     main ul li {
         flex: 0 1 calc(50% - 20px);
+    }
+}
+@media (max-width: 468px) {
+    main ul li {
+        flex: 0 1 calc(100% - 20px);
     }
 }
 
