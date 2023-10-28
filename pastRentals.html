@@ -28,31 +28,12 @@
     <main>
         <h1>Past Services</h1>
         <label for="sortBy">Sort by </label>
-        <select id="sortBy" name="varSelect">
-          <option selected>Price</option>
-          <option>Make/Model</option>
-          <option>Location</option>
+        <select id="sortBy" name="varSelect" onchange="resetListings()">
+          <option value="rate" selected>Price</option>
+          <option value="name">Name</option>
+          <option value="location">Location</option>
         </select>
-        <ul>
-            <li>
-                <img src="images/camry.png" width=100/>
-                <h2>Honda CRV</h2>
-                <p>New York City, NY</p>
-                <h3>$45/day</h3>
-            </li>
-            <li>
-                <img src="images/camry.png" width=100/>
-                <h2>Nissan Versa</h2>
-                <p>Vancouver, WA</p>
-                <h3>$36/day</h3>
-            </li>
-            <li>
-                <img src="images/camry.png" width=100/>
-                <h2>Toyota Camry</h2>
-                <p>Detroit, MI</p>
-                <h3>$22/day</h3>
-            </li>
-        </ul>
+        <ul id="listingsOL"></ul>
     </main>
 
     <footer>
@@ -60,4 +41,7 @@
       <a href="https://github.com/awrice/startup">GitHub</a>
     </footer>
   </body>
+
+  <script src="js/backend.js"></script>
+  <script src="js/listings.js"></script>
 </html>

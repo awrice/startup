@@ -38,7 +38,12 @@ function createListing(listing) {
 }
 
 function resetListings() {
-    const listings = retrieveListings();
+    let searchQuery = null;
+    if (window.location.pathname === "/pastRentals.html") { searchQuery = "{PAST}"; }
+    else {
+        searchQuery = null;
+    }
+    const listings = retrieveListings(searchQuery);
     // sort the listings based on the sortBy element
     let sort_by = document.getElementById("sortBy").value;
     if (sort_by === "rate") {
@@ -60,8 +65,7 @@ function resetListings() {
     for (listing of listings) {
         createListing(listing);
     }
-
-
 }
 
+console.log(window.location.pathname);
 resetListings();

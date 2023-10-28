@@ -1,8 +1,12 @@
 
 
-function retrieveListings(searchQuery="") {
+function retrieveListings(searchQuery=null) {
+    if (searchQuery === "{PAST}") {
+        console.log("FINDING HISTORY");
+        return getHistory();
+    }
     // retrieve listings from backend... for now, we'll just use these mock listings
-    listings = [
+    const listings = [
         {
             "id": 1,
             "img": "images/camry.png",
@@ -48,7 +52,7 @@ function retrieveListings(searchQuery="") {
 }
 
 function getHistory() {
-    history = [
+    const history = [
         {
             "id": 1,
             "img": "images/camry.png",
@@ -63,8 +67,8 @@ function getHistory() {
             "name": "Moving Van Rental",
             "description": "I'm willing to drive anywhere within two hours of central Provo and help move also!",
             "location": "Orem, UT",
-            "rate": { "amt": 20, "unit": "hour" }
+            "rate": { "amt": 40, "unit": "hour" }
         }
-    ]
+    ];
     return history;
 }
