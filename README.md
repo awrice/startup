@@ -61,3 +61,17 @@ For this deliverable, I made the application look better!
 * **Application elements** - There is a good understanding of what is the main body and what is the header and footer
 * **Application text content** - Everything is in Arial or Sans serif to give it a modernized, not-to-complex look
 * **Application images** - All the images are sized correctly and are shown in a stylized way
+
+
+## Javascript Deliverable
+(Required) Simon JavaScript deployed to your production environment
+(Required) A link to your GitHub startup repository prominently displayed on your application's home page
+(Required) Notes in your startup Git repository README.md file documenting what you modified and added with this deliverable
+Significant use of JavaScript to create a viable working application
+20% JavaScript support for future login.
+20% JavaScript support for future database data.
+20% JavaScript support for future WebSocket.
+30% JavaScript support for your application's interaction logic.
+10% - Multiple Git commits with meaningful comments.
+
+
