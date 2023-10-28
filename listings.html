@@ -29,19 +29,13 @@
         <input type="search" id="search" name="varSearch" placeholder="Search"/>
         <h1>Available Listings</h1>
         <label for="sortBy">Sort by </label>
-        <select id="sortBy" name="varSelect">
-          <option selected>Price</option>
-          <option>Make/Model</option>
-          <option>Location</option>
+        <select id="sortBy" name="varSelect" onchange="resetListings()">
+          <option value="rate" selected>Price</option>
+          <option value="name">Name</option>
+          <option value="location">Location</option>
         </select>
-        <ul>
-            <li>
-                <img src="images/camry.png" width=100/>
-                <h2>Toyota Camry</h2>
-                <p>260 N 700 E</p>
-                <h3>$30/day</h3>
-            </li>
-            <li>
+        <ul id="listingsOL">
+            <!-- <li>
                 <img src="images/camry.png" width=100/>
                 <h2>Honda CRV</h2>
                 <p>782 N 750 E</p>
@@ -52,7 +46,7 @@
                 <h2>Nissan Versa</h2>
                 <p>1803 Meadowlane</p>
                 <h3>$33/day</h3>
-            </li>
+            </li> -->
         </ul>
     </main>
 
@@ -61,4 +55,6 @@
       <a href="https://github.com/awrice/startup">GitHub</a>
     </footer>
   </body>
+
+  <script src="js/listings.js"></script>
 </html>

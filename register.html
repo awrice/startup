@@ -26,15 +26,24 @@
 
     <main>
       <h1>Register Your Service</h1>
-      <form method="get" action="listings.html" class="fullwidth">
+      <form method="get" onsubmit="registerService();" class="fullwidth">
         <ul style="list-style-type:none;">
           <li>
             <label for="title">Service Title</label>
             <input type="text" id="title" name="title" placeholder="Hiking Gear" required />
           </li>
           <li>
-            <label for="descirption">Descirption</label>
-            <textarea id="descirption" name="descirption"  ></textarea>
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="Provo, UT" required />
+          </li>
+          <li>
+            <label for="description">Description</label>
+            <textarea id="description" name="description" ></textarea>
+          </li>
+          <li>
+            <label for="rate">Rate (enter * if it is customer specific)</label>
+            $ <input type="text" id="rate_amt" name="rate" placeholder="20" required /> per
+            <input type="text" id="rate_unit" name="rate" placeholder="day" required />
           </li>
           <li>
             <label for="images">Images associated with your service</label>
@@ -50,4 +59,6 @@
       <a href="https://github.com/awrice/startup">GitHub</a>
     </footer>
   </body>
+
+  <script src="js/registerService.js"></script>
 </html>
