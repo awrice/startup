@@ -71,3 +71,16 @@ For this deliverable, I added the following JavaScript functionality:
 * **Application is Interactive** - all the sorting dropdowns now work, and going from one place to another is working as intended.
 
 
+## Service Deliverable
+For this deliverable I added backend endpoints.
+* **Node.js/Express HTTP service** - done!
+* **Static middleware for frontend** - done!
+* **Calls to third party endpoints** - 
+* **Backend service endpoints** - The endpoints I added are as follows:
+    * GET /listing/:query - retrieve listings; a way to look through the listings in the database and return the ones that correlate with the search query
+    * GET /services - gets the services being used by the current user
+    * POST /listing - registers a new service, owned by the current user; req body holds registered service information. 
+    * POST /user - registers a new user; req body holds user info
+    * GET /messages/:otheruser - gets the messages for a current user with some other user
+    * GET /messages - gets the people who have messages with the current user
+* **Frontend calls service endpoints** - I did this using the fetch function.

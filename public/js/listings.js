@@ -36,13 +36,17 @@ function createListing(listing) {
     }
 }
 
-function resetListings() {
-    let searchQuery = null;
-    if (window.location.pathname === "/services.html") { searchQuery = "{PAST}"; }
-    else {
-        searchQuery = null;
+async function resetListings() {
+    let searchQuery = "";
+    let listings = null;
+    if (window.location.pathname === "/services.html") {
+        listings = await retrieveServices();
     }
-    const listings = retrieveListings(searchQuery);
+    else {
+        searchQuery = document.getElementById("search").value;
+        listings = await retrieveListings(searchQuery);
+    }
+
     // sort the listings based on the sortBy element
     let sort_by = document.getElementById("sortBy").value;
     if (sort_by === "rate") {
