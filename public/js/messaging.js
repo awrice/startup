@@ -1,9 +1,9 @@
-function getMessages() {
+async function getMessages() {
     const urlParams = new URLSearchParams(window.location.search);
     const message_id = urlParams.get("messageId");
 
-    messages = retrieveMessages();
-    return messages[message_id];
+    messages = await retrieveMessages(message_id);
+    return messages;
 }
 
 function createMessage(message) {
@@ -17,8 +17,8 @@ function createMessage(message) {
     else { p_elem.classList.add("them"); }
 }
 
-function setupPage() {
-    const message_chain = getMessages()
+async function setupPage() {
+    const message_chain = await getMessages();
 
     for (message of message_chain) {
         createMessage(message);

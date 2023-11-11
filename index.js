@@ -126,7 +126,6 @@ app.use(express.static('public'));
 const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// GET /listing/:query  -->  
 apiRouter.get("/listing/:query", (req, res) => {
     let search_query = req.params.query;
     console.log("GET /listing/" + search_query);
@@ -167,10 +166,18 @@ apiRouter.get("/services", (_req, res) => {
     res.json(services);
 });
 
+apiRouter.get("/messages/:otherid", (req, res) => {
+    let other_id = req.params.otherid;
+    console.log("GET /messages/" + other_id);
+    let ret = DATABASE["messages"][0][other_id] == undefined ? {} : DATABASE["messages"][0][other_id];
+    console.log(ret);
+    res.json(ret);
+});
+
 // any unknown path goes here
-// app.use((_req, res) => {
-//     res.sendFile('index.html', { root: 'public' });
-// });
+app.use((_req, res) => {
+    res.sendFile('index.html', { root: 'public' });
+});
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
