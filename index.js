@@ -154,7 +154,6 @@ apiRouter.post("/listing", (req, res) => {
     DATABASE["listings"][id] = registered_listing;
 
     let response = {"id": registered_listing["id"]};
-    console.log(DATABASE["listings"]);
     res.json(response);
 });
 
@@ -170,7 +169,6 @@ apiRouter.get("/messages/:otherid", (req, res) => {
     let other_id = req.params.otherid;
     console.log("GET /messages/" + other_id);
     let ret = DATABASE["messages"][0][other_id] == undefined ? {} : DATABASE["messages"][0][other_id];
-    console.log(ret);
     res.json(ret);
 });
 

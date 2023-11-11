@@ -70,5 +70,10 @@ async function resetListings() {
     }
 }
 
+async function meow() {
+    let fact = await getMeowFact();
+    document.getElementById("meowFact").innerHTML = fact;
+}
+
 console.log(window.location.pathname);
 resetListings();

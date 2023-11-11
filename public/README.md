@@ -75,7 +75,7 @@ For this deliverable, I added the following JavaScript functionality:
 For this deliverable I added backend endpoints.
 * **Node.js/Express HTTP service** - done!
 * **Static middleware for frontend** - done!
-* **Calls to third party endpoints** - I didn't implement any third party endpoints 
+* **Calls to third party endpoints** - I implemented a meow facts clicker on the service tab (it seems completely useless but I'll do what I have to do to get a good grade...)
 * **Backend service endpoints** - The endpoints I added are as follows:
     * GET /listing/:query - retrieve listings; a way to look through the listings in the database and return the ones that correlate with the search query
     * GET /services - gets the services being used by the current user

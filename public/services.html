@@ -6,6 +6,18 @@
     <title>Pocket Towns</title>
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" href="style1.css">
+    <style>
+      #meowFactClicker {
+        padding: 5pt;
+      }
+      #meowFactClicker:hover {
+        background-color: royalblue;
+        color: white;
+      }
+      #meowFact {
+        margin-bottom: 20pt;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -26,14 +38,16 @@
     <hr />
 
     <main>
-        <h1>Services</h1>
-        <label for="sortBy">Sort by </label>
-        <select id="sortBy" name="varSelect" onchange="resetListings()">
-          <option value="rate" selected>Price</option>
-          <option value="name">Name</option>
-          <option value="location">Location</option>
-        </select>
-        <ul id="listingsOL"></ul>
+      <h2 id="meowFactClicker" onclick="meow()">Click here to get a Meow Fact!</h2>
+      <p id="meowFact">[Meow Fact here]</p>
+      <h1>Services</h1>
+      <label for="sortBy">Sort by </label>
+      <select id="sortBy" name="varSelect" onchange="resetListings()">
+        <option value="rate" selected>Price</option>
+        <option value="name">Name</option>
+        <option value="location">Location</option>
+      </select>
+      <ul id="listingsOL"></ul>
     </main>
 
     <footer>

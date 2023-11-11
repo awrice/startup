@@ -42,3 +42,9 @@ async function registerServiceBackend(listing) {
     }).then((response) => response.json());
     return response;
 }
+
+async function getMeowFact() {
+    let response = await fetch("https://meowfacts.herokuapp.com/")
+        .then((response) => response.json());
+    return response["data"][0];
+}
