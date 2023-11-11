@@ -25,20 +25,22 @@ async function retrieveServices() {
     return listings;
 }
 
-async function registerListing(listing) {
+async function registerServiceBackend(listing) {
     let response = await fetch("/api/listing", {
         method: "post",
         headers: { "Content-Type": "application/json", },
-        body: JSON.stringify({
-            // id is set on the serverside
-            "img": "images/camry.png",
-            "name": "New Listing!",
-            "description": "Yeah okay this works maybe??",
-            "location": "Provo, UT",
-            "rate": { "amt": 7000, "unit": "hour" },
-            "owner_id": 1
-        })
+        body: JSON.stringify(listing)
+        // body: JSON.stringify({
+        //     // id is set on the serverside
+        //     "img": "images/camry.png",
+        //     "name": "New Listing!",
+        //     "description": "Yeah okay this works maybe??",
+        //     "location": "Provo, UT",
+        //     "rate": { "amt": 7000, "unit": "hour" },
+        //     "owner_id": 1
+        // })
     }).then((response) => response.json());
+    return response;
 }
 
 

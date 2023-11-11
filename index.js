@@ -149,12 +149,14 @@ apiRouter.get("/listing/:query", (req, res) => {
 apiRouter.post("/listing", (req, res) => {
     console.log("POST /listing");
 
-    let id = DATABASE["listings"].length
+    let id = Object.entries(DATABASE["listings"]).length + 1;
     registered_listing = req.body
     registered_listing["id"] = id;
     DATABASE["listings"][id] = registered_listing;
 
-    res.json({id: registered_listing["id"]});
+    let response = {"id": registered_listing["id"]};
+    console.log(DATABASE["listings"]);
+    res.json(response);
 });
 
 apiRouter.get("/services", (_req, res) => {
