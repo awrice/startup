@@ -1,24 +1,27 @@
 
 
-function retrieveListing() {
+async function retrieveListing() {
     const urlParams = new URLSearchParams(window.location.search);
     const listing_id = urlParams.get("listingId");
+    const listing_name = urlParams.get("listingName");
     console.log(listing_id);
+    console.log(listing_name)
 
-    listings = retrieveListings();
+    let listings = await retrieveListings(listing_name);
+    console.log(listings);
 
-    listing = null;
+    let listing = null;
     for (l in listings) {
         if (listings[l]["id"] === parseInt(listing_id)) {
             listing = listings[l];
             break;
         }
     }
-    return listing
+    return listing;
 }
 
-function setupPage() {
-    listing = retrieveListing();
+async function setupPage() {
+    listing = await retrieveListing();
     let image_elem = document.querySelector("#image");
     let name_elem = document.querySelector("#name");
     let location_elem = document.querySelector("#location");

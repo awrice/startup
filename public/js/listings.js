@@ -1,6 +1,6 @@
 function listingClicked(listing) {
     if (window.location.pathname === "/services.html") { window.location = "/messaging.html?messageId=" + listing["owner_id"]; }
-    else { window.location = "/listing.html?listingId=" + listing["id"]; }
+    else { window.location = "/listing.html?listingId=" + listing["id"] + "&listingName=" + listing["name"]; }
 }
 
 function createListing(listing) {
