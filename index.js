@@ -111,6 +111,7 @@ let DATABASE = {
 // --- //
 
 const express = require('express');
+const db = require('./database.js');
 const app = express();
 
 // The service port. In production the frontend code is statically hosted by the service on the same port.
@@ -172,6 +173,18 @@ apiRouter.get("/messages/:otherid", (req, res) => {
     res.json(ret);
 });
 
+apiRouter.get("/listingimg/:imageId", (req, res) => {
+    db.test()
+    .then((imageBuffer) => {
+        res.writeHead(200, { 'Content-Type': 'image/jpeg' });
+        res.end(imageBuffer, 'binary');
+    });
+
+})
+
+
+
+
 // any unknown path goes here
 app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
@@ -180,3 +193,4 @@ app.use((_req, res) => {
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
+
