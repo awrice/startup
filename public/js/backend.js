@@ -34,12 +34,13 @@ async function retrieveMessages(message_id) {
     return messages;
 }
 
-async function registerServiceBackend(listing) {
+async function registerServiceBackend(formData) {
     let response = await fetch("/api/listing", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(listing)
+        // headers: { "Content-Type": "application/json" },
+        body: formData
     }).then((response) => response.json());
+    console.log(response);
     return response;
 }
 

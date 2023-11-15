@@ -10,6 +10,7 @@ const db = client.db('rental');
 const LISTING_COLL = 'listings';
 const MESSAGE_COLL = 'messages';
 const USER_COLL = 'users';
+const IMAGES_COLL = 'images';
 
 async function testConnection() {
     // Test that you can connect to the database
@@ -25,28 +26,28 @@ async function testConnection() {
 async function insertListing(listing) {
     const collection = db.collection(LISTING_COLL);
     const res = await collection.insertOne(listing);
-    return res.acknowledged;
+    return res;
 }
 
 async function createUser(user) {
     const collection = db.collection(USER_COLL);
     const res = await collection.insertOne(user);
-    return res.acknowledged;
+    return res;
 }
 
 async function retrieveImage(imageId) {
     try {
-        const res = await db.collection('__tests__').findOne({ _id: new ObjectId(imageId) });
-        return res.image.buffer;
+        const res = await db.collection(IMAGES_COLL).findOne({ _id: new ObjectId(imageId) });
+        return res;
     } catch {
         return null;
     }
 
 }
 
-async function insertImage(imageBuf) {
+async function insertImage(image) {
     try {
-        const res = await db.collection('__tests__').insertOne({ image: new Binary(imageBuf) });
+        const res = await db.collection(IMAGES_COLL).insertOne(image);
         if (res) { return res.insertedId; }
         else { return null; }
     } catch {

@@ -112,6 +112,7 @@ let DATABASE = {
 
 const express = require('express');
 const multer = require('multer');
+const fs = require('fs');
 const db = require('./database.js');
 const app = express();
 
@@ -151,16 +152,33 @@ apiRouter.get("/listing/:query", (req, res) => {
     res.json(filtered_listings);
 });
 
-apiRouter.post("/listing", (req, res) => {
+apiRouter.post("/listing", upload.array('images'), (req, res) => {
     console.log("POST /listing");
+    let body = req.body;
+    let listing = {
+        "imgs": [],
+        "title": body.title,
+        "location": body.location,
+        "description": body.description,
+        "rate_amt": body.rate_amt,
+        "rate_unit": body.rate_unit
+    };
 
-    let id = Object.entries(DATABASE["listings"]).length + 1;
-    registered_listing = req.body
-    registered_listing["id"] = id;
-    DATABASE["listings"][id] = registered_listing;
+    (async function() {
+        for (const img in req.files) {
+            console.log(req.files[img]);
+            // const imageData = await ;
+            let new_id = await db.insertImage(req.files[img])
+            listing.imgs.push(new_id);
+        }
+        let result = await db.insertListing(listing);
+        res.json(result);
+    })();
 
-    let response = {"id": registered_listing["id"]};
-    res.json(response);
+    // let id = Object.entries(DATABASE["listings"]).length + 1;
+    // registered_listing = req.body
+    // registered_listing["id"] = id;
+    // DATABASE["listings"][id] = registered_listing;
 });
 
 apiRouter.get("/services", (_req, res) => {
@@ -180,14 +198,16 @@ apiRouter.get("/messages/:otherid", (req, res) => {
 
 apiRouter.get("/img/:imageId", (req, res) => {
     db.retrieveImage(req.params.imageId)
-    .then((imageBuf) => {
-        if (imageBuf == null) {
+    .then((image) => {
+        if (image == null) {
             console.log("Image not found")
             res.status(404).json({ error: 'Image not found.' });
         } else { 
             console.log("Image found!");
-            res.writeHead(200, { 'Content-Type': 'image/jpeg' });
-            res.end(imageBuf, 'binary');
+            // console.log(image);
+            res.json(image);
+            // res.writeHead(200, { 'Content-Type': '' });
+            // res.end(image);
         }
     });
 });

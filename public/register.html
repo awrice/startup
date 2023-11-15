@@ -26,7 +26,7 @@
 
     <main>
       <h1>Register Your Service</h1>
-      <form method="get" onsubmit="registerClicked();" class="fullwidth">
+      <form id="registerServiceForm" method="get" onsubmit="registerClicked();" class="fullwidth">
         <ul style="list-style-type:none;">
           <li>
             <label for="title">Service Title</label>
@@ -41,9 +41,9 @@
             <textarea id="description" name="description"></textarea>
           </li>
           <li>
-            <label for="rate">Rate (enter * if it is customer specific)</label>
-            $ <input type="text" id="rate_amt" name="rate" placeholder="20" required /> per
-            <input type="text" id="rate_unit" name="rate" placeholder="day" required />
+            <label for="rate_amt rate_unit">Rate (enter * if it is customer specific)</label>
+            $ <input type="text" id="rate_amt" name="rate_amt" placeholder="20" required /> per
+            <input type="text" id="rate_unit" name="rate_unit" placeholder="day" required />
           </li>
           <li>
             <label for="images">Images associated with your service</label>

@@ -1,27 +1,38 @@
 function assembleValues() {
-    const title_input = document.querySelector("#title");
-    const location_input = document.querySelector("#location");
-    const description_input = document.querySelector("#description");
-    const rate_amt_input = document.querySelector("#rate_amt");
-    const rate_unit_input = document.querySelector("#rate_unit");
-    const images_input = document.querySelector("#images");
+    // const title = document.querySelector("#title").value;
+    // const location = document.querySelector("#location").value;
+    // const description = document.querySelector("#description").value;
+    // const rate_amt = document.querySelector("#rate_amt").value;
+    // const rate_unit = document.querySelector("#rate_unit").value;
+    // const images = document.querySelector("#images").files;
 
-    let listing = {
-        "img": null, // uhhh... not sure how we should send images to the backend
-        "name": title_input.value,
-        "description": description_input.value,
-        "location": location_input.value,
-        "rate": { "amt": rate_amt_input.value, "unit": rate_unit_input.value },
-        "owner_id": -1
-    }
+    // console.log(title);
+    // console.log(location);
+    // console.log(description);
+    // console.log(rate_amt);
+    // console.log(rate_unit);
+    // console.log(images);
 
-    return listing;
+    // let formData = new FormData();
+
+    // for (let i = 0; i < images.length; i++) {
+    //     formData.append('images', images[i]);
+    // }
+    // formData.append('name', title);
+    // formData.append('description', description);
+    // formData.append('location', location);
+    // // formData.append('rate', { 'amt': rate_amt, 'unit': rate_unit });
+    // formData.append('owner_id', "-1");
+
+    // console.log(formData);
+
+    let formData = new FormData(document.querySelector("#registerServiceForm"));
+    return formData;
 }
 
 async function registerClicked() {
-    const listing = assembleValues();
+    const formData = assembleValues();
     // send the listing to the backend
-    response = await registerServiceBackend(listing);
-    // add it to the large list, and associate it with this user
+    await registerServiceBackend(formData);
     return;
 }
