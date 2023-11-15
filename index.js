@@ -111,11 +111,16 @@ let DATABASE = {
 // --- //
 
 const express = require('express');
+const multer = require('multer');
 const db = require('./database.js');
 const app = express();
 
 // The service port. In production the frontend code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
+
+// Set up multer to handle file uploads
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
@@ -173,14 +178,36 @@ apiRouter.get("/messages/:otherid", (req, res) => {
     res.json(ret);
 });
 
-apiRouter.get("/listingimg/:imageId", (req, res) => {
-    db.test()
-    .then((imageBuffer) => {
-        res.writeHead(200, { 'Content-Type': 'image/jpeg' });
-        res.end(imageBuffer, 'binary');
+apiRouter.get("/img/:imageId", (req, res) => {
+    db.retrieveImage(req.params.imageId)
+    .then((imageBuf) => {
+        if (imageBuf == null) {
+            console.log("Image not found")
+            res.status(404).json({ error: 'Image not found.' });
+        } else { 
+            console.log("Image found!");
+            res.writeHead(200, { 'Content-Type': 'image/jpeg' });
+            res.end(imageBuf, 'binary');
+        }
     });
+});
 
-})
+apiRouter.post("/img", upload.single('file'), (req, res) => {
+    console.log("POST /img");
+    if (req.file == undefined) { res.status(404).json({ error: 'No file uploaded' }) }
+    else {
+        db.insertImage(req.file.buffer)
+        .then((insertedId) => {
+            if (insertedId == null) {
+                console.log("Unable to upload the image")
+                res.status(500).json({ done: false, error: 'Could not upload the image' });
+            } else {
+                console.log("Done.");
+                res.status(200).json({ done: true, insertedId: insertedId });
+            }
+        })
+    }
+});
 
 
 

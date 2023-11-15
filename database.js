@@ -1,4 +1,4 @@
-const { MongoClient, Binary } = require('mongodb');
+const { MongoClient, Binary, ObjectId } = require('mongodb');
 const fs = require('fs');
 const config = require('./dbConfig.json');
 
@@ -32,6 +32,26 @@ async function createUser(user) {
     const collection = db.collection(USER_COLL);
     const res = await collection.insertOne(user);
     return res.acknowledged;
+}
+
+async function retrieveImage(imageId) {
+    try {
+        const res = await db.collection('__tests__').findOne({ _id: new ObjectId(imageId) });
+        return res.image.buffer;
+    } catch {
+        return null;
+    }
+
+}
+
+async function insertImage(imageBuf) {
+    try {
+        const res = await db.collection('__tests__').insertOne({ image: new Binary(imageBuf) });
+        if (res) { return res.insertedId; }
+        else { return null; }
+    } catch {
+        return null;
+    }
 }
 
 async function close() {
@@ -105,4 +125,4 @@ async function main() {
 // console.log("done!");
 
 
-module.exports = { testConnection, insertListing, createUser, test, close }
+module.exports = { testConnection, insertListing, createUser, retrieveImage, insertImage, test, close }
