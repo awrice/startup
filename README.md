@@ -3,28 +3,6 @@ CS 260 Startup
 
 ## Notes found [here](notes.md)
 
-## Elevator Pitch
-Rental cars are too expensive! Pockettowns is a new way of getting your hands on a vehicle while you're travelling. Similar to Airbnb, users will register their cars as rentable, and when you come to a new destination, travellers will look at the available listings for that area! They'll connect with the vehicle owners, and borrow their car for the duration of their trip. Travelling has never been easier!
-
-## Mock Up
-Main Page Design of the web application
-<div style="display: inline-block">
-    <img style="float: left; height: 200pt" src="mockImages/SignUp.png" />
-    <img style="float: left; height: 200pt" src="mockImages/RegisterCar.png" />
-    <img style="float: left; height: 200pt" src="mockImages/AvailableListings.png" />
-    <img style="float: left; height: 200pt" src="mockImages/RentalHistory.png" />
-</div>
-
-This is the sequence diagram of how the different users communicate with the server
-<img style="height: 400pt" src="mockImages/_server_diagram.png" />
-
-## Key Features
-* Secure login over HTTPS
-* Extracts and Displays data about available cars around your area
-* Registration of a car for possible travelers in your area
-* Real time communication with a booked renter
-* Ratings of all the renters and of the cars as they are rented
-
 ## Technologies
 I will use the required technologies in the following ways
 * **HTML** - There are four HTML pages in this application: Sign up/Login, Car Registering, Available Listings, & Car rental History
@@ -83,3 +61,5 @@ For this deliverable I added backend endpoints.
     * GET /messages/:otheruser - gets the messages for a current user with some other user
 * **Frontend calls service endpoints** - I did this using the fetch function.
 
+
+## DB Deliverable
