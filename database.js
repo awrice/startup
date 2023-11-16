@@ -29,6 +29,17 @@ async function insertListing(listing) {
     return res;
 }
 
+async function retrieveListings(searchQuery) {
+    const query = {
+        $or: [ {title: {$regex: searchQuery}}, {description: {$regex: searchQuery}}]
+    }
+    let result = db.collection(LISTING_COLL).find(query);
+    result = await result.toArray();
+    // const result = await cursor.toArray();
+    // console.log("Found?");
+    return result;
+}
+
 async function createUser(user) {
     const collection = db.collection(USER_COLL);
     const res = await collection.insertOne(user);
@@ -126,4 +137,13 @@ async function main() {
 // console.log("done!");
 
 
-module.exports = { testConnection, insertListing, createUser, retrieveImage, insertImage, test, close }
+module.exports = { 
+    testConnection, 
+    insertListing, 
+    retrieveListings,
+    createUser, 
+    retrieveImage, 
+    insertImage, 
+    test, 
+    close 
+}

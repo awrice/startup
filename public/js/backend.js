@@ -6,12 +6,18 @@
 //   });
 
 
+async function retrieveImage(imageId) {
+    let url = "/api/img/" + imageId;
+    let image = await fetch(url, { method: "GET" })
+        .then((response) => response.json());
+    return image;
+}
 
 async function retrieveListings(searchQuery=null) {
     if (searchQuery == null || searchQuery.trim() === "") { searchQuery = "null"; }
     let url = "/api/listing/" + searchQuery;
     let listings = await fetch(url, { method: "GET" })
-        .then((response) => response.json())
+        .then((response) => response.json());
 
     return listings;
 }

@@ -133,22 +133,14 @@ app.use(express.static('public'));
 const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-apiRouter.get("/listing/:query", (req, res) => {
+apiRouter.get("/listing/:query", async (req, res) => {
     let search_query = req.params.query;
     console.log("GET /listing/" + search_query);
 
     if (search_query === "null") { search_query = ""; }
 
     // Get the listings from the database
-    const all_listings = DATABASE["listings"];
-    let filtered_listings = []
-    for (const [_id, listing] of Object.entries(all_listings)) {
-        if (listing["name"].toLowerCase().includes(search_query.toLowerCase()) || 
-            listing["description"].toLowerCase().includes(search_query.toLowerCase()) || 
-            listing["location"].toLowerCase().includes(search_query.toLowerCase())) {
-            filtered_listings.push(listing);
-        }
-    }
+    let filtered_listings = await db.retrieveListings(search_query);
     res.json(filtered_listings);
 });
 
@@ -174,11 +166,6 @@ apiRouter.post("/listing", upload.array('images'), (req, res) => {
         let result = await db.insertListing(listing);
         res.json(result);
     })();
-
-    // let id = Object.entries(DATABASE["listings"]).length + 1;
-    // registered_listing = req.body
-    // registered_listing["id"] = id;
-    // DATABASE["listings"][id] = registered_listing;
 });
 
 apiRouter.get("/services", (_req, res) => {
@@ -200,14 +187,9 @@ apiRouter.get("/img/:imageId", (req, res) => {
     db.retrieveImage(req.params.imageId)
     .then((image) => {
         if (image == null) {
-            console.log("Image not found")
             res.status(404).json({ error: 'Image not found.' });
         } else { 
-            console.log("Image found!");
-            // console.log(image);
             res.json(image);
-            // res.writeHead(200, { 'Content-Type': '' });
-            // res.end(image);
         }
     });
 });

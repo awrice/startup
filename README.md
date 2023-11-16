@@ -63,3 +63,9 @@ For this deliverable I added backend endpoints.
 
 
 ## DB Deliverable
+For this deliverable, I added the following functionality:
+* **MongoDB Atlas** - created, and the server can connect to it using the dbConfig.json file
+* **Endpoints for data** - the endpoints connect to the database appropriately and store/retrieve what they need
+* **Stores data in MongoDB** - done!
+
+**NOTE**: There are some services that require the understanding of how to store user credentials that haven't been completed yet (things affiliated with the user)... I'll get those done in the Login Deliverable
