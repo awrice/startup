@@ -112,6 +112,9 @@ let DATABASE = {
 
 const express = require('express');
 const multer = require('multer');
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
+
 const fs = require('fs');
 const db = require('./database.js');
 const app = express();
@@ -123,8 +126,9 @@ const port = process.argv.length > 2 ? process.argv[2] : 3000;
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// JSON body parsing using built-in middleware
+// Middlewares
 app.use(express.json());
+app.use(cookieParser());
 
 // Serve up the frontend static content hosting
 app.use(express.static('public'));
@@ -132,6 +136,48 @@ app.use(express.static('public'));
 // Router for service endpoints
 const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
+
+function setAuthCookie(res, authToken) {
+    res.cookie('token', authToken, {
+        secure: true,
+        httpOnly: true,
+        sameSite: 'strict',
+    });
+}
+
+apiRouter.post('/auth/create', async (req, res) => {
+    console.log('POST /auth/create');
+    if (await db.getUser(req.body.username)) { res.status(409).send({ msg: 'Existing user' }); }
+    else {
+        const user = await db.createUser(req.body.username, req.body.password);
+        setAuthCookie(res, user.token);
+        res.send({ id: user._id });
+    }
+});
+
+apiRouter.post('/auth/login', async (req, res) => {
+    console.log('POST /auth/login');
+    const user = await db.getUser(req.body.username);
+    if (user) {
+        if (await bcrypt.compare(req.body.password, user.password)) {
+            setAuthCookie(res, user.token);
+            res.send({ id: user._id });
+            return;
+        }
+    }
+    res.status(401).send({ msg: 'Unauthorized' });
+});
+
+apiRouter.get('/user/me', async (req, res) => {
+    console.log('GET /user/me');
+    authToken = req.cookies['token'];
+    const user = await db.getMe(authToken);
+    if (user) {
+        res.send({ username: user.username });
+        return;
+    }
+    res.status(401).send({ msg: 'Unauthorized' });
+});
 
 apiRouter.get("/listing/:query", async (req, res) => {
     let search_query = req.params.query;
@@ -144,28 +190,32 @@ apiRouter.get("/listing/:query", async (req, res) => {
     res.json(filtered_listings);
 });
 
-apiRouter.post("/listing", upload.array('images'), (req, res) => {
+apiRouter.post("/listing", upload.array('images'), async (req, res) => {
     console.log("POST /listing");
     let body = req.body;
+    const user = await db.getMe(req.cookies['token']);
     let listing = {
         "imgs": [],
         "title": body.title,
         "location": body.location,
         "description": body.description,
         "rate_amt": body.rate_amt,
-        "rate_unit": body.rate_unit
+        "rate_unit": body.rate_unit,
+        "owner_id": user._id
     };
 
-    (async function() {
-        for (const img in req.files) {
-            console.log(req.files[img]);
-            // const imageData = await ;
-            let new_id = await db.insertImage(req.files[img])
-            listing.imgs.push(new_id);
-        }
-        let result = await db.insertListing(listing);
-        res.json(result);
-    })();
+    for (const img in req.files) {
+        console.log(req.files[img]);
+        // const imageData = await ;
+        let new_id = await db.insertImage(req.files[img])
+        listing.imgs.push(new_id);
+    }
+    let listing_result = await db.insertListing(listing);
+    console.log(listing_result);
+
+    await db.updateUserHostService(req.cookies['token'], listing_result.insertedId);
+
+    res.json(listing_result);
 });
 
 apiRouter.get("/services", (_req, res) => {
@@ -210,9 +260,6 @@ apiRouter.post("/img", upload.single('file'), (req, res) => {
         })
     }
 });
-
-
-
 
 // any unknown path goes here
 app.use((_req, res) => {

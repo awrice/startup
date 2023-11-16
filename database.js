@@ -1,5 +1,7 @@
 const { MongoClient, Binary, ObjectId } = require('mongodb');
 const fs = require('fs');
+const uuid = require('uuid');
+const bcrypt = require('bcrypt');
 const config = require('./dbConfig.json');
 
 // Connect to the database cluster
@@ -11,6 +13,42 @@ const LISTING_COLL = 'listings';
 const MESSAGE_COLL = 'messages';
 const USER_COLL = 'users';
 const IMAGES_COLL = 'images';
+
+async function getUser(username) {
+    const collection = db.collection(USER_COLL);
+    let user = await collection.findOne({ username: username });
+    return user;
+}
+
+async function createUser(username, password) {
+    const collection = db.collection(USER_COLL);
+    // Hash the password before we insert it into the database
+    const passwordHash = await bcrypt.hash(password, 10);
+    const user = {
+        username: username,
+        password: passwordHash,
+        token: uuid.v4(),
+        services_as_host: [],
+        services_as_client: []
+    };
+    await collection.insertOne(user);
+    return user;
+}
+
+async function getMe(authToken) {
+    const collection = db.collection(USER_COLL);
+    let user = await collection.findOne({ token: authToken });
+    return user;
+}
+
+async function updateUserHostService(authToken, listing_id) {
+    const collection = db.collection(USER_COLL);
+    let result = await collection.updateOne(
+        { token: authToken }, 
+        { $push: { services_as_host: listing_id } }
+    );
+    return result;
+}
 
 async function testConnection() {
     // Test that you can connect to the database
@@ -38,12 +76,6 @@ async function retrieveListings(searchQuery) {
     // const result = await cursor.toArray();
     // console.log("Found?");
     return result;
-}
-
-async function createUser(user) {
-    const collection = db.collection(USER_COLL);
-    const res = await collection.insertOne(user);
-    return res;
 }
 
 async function retrieveImage(imageId) {
@@ -138,10 +170,13 @@ async function main() {
 
 
 module.exports = { 
+    getUser,
+    createUser, 
+    getMe,
+    updateUserHostService,
     testConnection, 
     insertListing, 
     retrieveListings,
-    createUser, 
     retrieveImage, 
     insertImage, 
     test, 

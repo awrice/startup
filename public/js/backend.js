@@ -1,10 +1,26 @@
-// fetch("/api/listing/imadam", {
-//     method: "GET"
-// })  .then((response) => response.json())
-//     .then((jsonResponse) => {
-//     console.log(jsonResponse);
-//   });
+async function login(username_, password_) {
+    let url = "/api/auth/login";
+    let status = await fetch(url, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: username_, password: password_ })
+    }).then((response) => response.status);
+    return status
+}
 
+async function createUser(username_, password_)  {
+    let url = "/api/auth/create";
+    let status = await fetch(url, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: username_, password: password_ })
+    }).then((response) => response.status);
+    return status;
+}
+
+async function getMe() {
+    
+}
 
 async function retrieveImage(imageId) {
     let url = "/api/img/" + imageId;

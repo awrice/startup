@@ -6,7 +6,6 @@
     <title>Pocket Towns</title>
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" href="style1.css">
-    <script src="js/login.js"></script>
   </head>
   <body>
     <header>
@@ -17,10 +16,10 @@
         <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
         <menu>
           <li><a href="index.html">Home</a></li>
-          <li><a href="listings.html">Listings</a></li>
+          <!-- <li><a href="listings.html">Listings</a></li>
           <li><a href="register.html">Register Your Service</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="account.html">Account</a></li>
+          <li><a href="account.html">Account</a></li> -->
         </menu>
       </nav>
     </header>
@@ -28,7 +27,7 @@
     <main>
       <div class="welcome-screen">
         <h1>Login</h1>
-        <form method="get" action="listings.html">
+        <form method="get" onsubmit="return false;">
           <div>
             <label for="name"></label>
             <input type="text" id="name" placeholder="username" />
@@ -37,7 +36,9 @@
             <label for="password"></label>
             <input type="password" id="password" name="varPassword" placeholder="password" />
           </div>
-          <button type="submit" onclick="login()">Login</button>
+          <p id="logindialog"></p>
+          <button onclick="loginClicked()">Login</button>
+          <button onclick="createClicked()">Create</button>
         </form>
       </div>
     </main>
@@ -47,4 +48,7 @@
       <a href="https://github.com/awrice/startup">GitHub</a>
     </footer>
   </body>
+
+  <script src="js/backend.js"></script>
+  <script src="js/login.js"></script>
 </html>
