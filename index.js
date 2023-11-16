@@ -190,6 +190,14 @@ apiRouter.get("/listing/:query", async (req, res) => {
     res.json(filtered_listings);
 });
 
+apiRouter.get("/listingID/:listingId", async (req, res) => {
+    console.log("GET /listingID/" + req.params.listingId);
+
+    let result = await db.retrieveListing(req.params.listingId);
+    console.log(result);
+    res.json(result);
+})
+
 apiRouter.post("/listing", upload.array('images'), async (req, res) => {
     console.log("POST /listing");
     let body = req.body;

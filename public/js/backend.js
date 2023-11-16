@@ -18,10 +18,6 @@ async function createUser(username_, password_)  {
     return status;
 }
 
-async function getMe() {
-    
-}
-
 async function retrieveImage(imageId) {
     let url = "/api/img/" + imageId;
     let image = await fetch(url, { method: "GET" })
@@ -36,6 +32,14 @@ async function retrieveListings(searchQuery=null) {
         .then((response) => response.json());
 
     return listings;
+}
+
+async function retrieveListing(listingId) {
+    let url = "/api/listingID/" + listingId;
+    let listing = await fetch(url, { method: "GET" })
+        .then((response) => response.json());
+
+    return listing;
 }
 
 async function retrieveServices() {

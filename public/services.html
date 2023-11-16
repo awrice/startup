@@ -40,14 +40,21 @@
     <main>
       <h2 id="meowFactClicker" onclick="meow()">Click here to get a Meow Fact!</h2>
       <p id="meowFact">[Meow Fact here]</p>
-      <h1>Services</h1>
+
+      <h1>Your Registered Services</h1>
+      <ul id="hostListingsOL"></ul>
+      <h1>Services You're Using</h1>
+      <ul id="clientListingsOL"></ul>
+
+
+      <!-- <h1>Services</h1>
       <label for="sortBy">Sort by </label>
       <select id="sortBy" name="varSelect" onchange="resetListings()">
         <option value="rate" selected>Price</option>
         <option value="name">Name</option>
         <option value="location">Location</option>
       </select>
-      <ul id="listingsOL"></ul>
+      <ul id="listingsOL"></ul> -->
     </main>
 
     <footer>
@@ -57,5 +64,6 @@
   </body>
 
   <script src="js/backend.js"></script>
-  <script src="js/listings.js"></script>
+  <script src="js/listingDOMmanager.js"></script>
+  <script src="js/services.js"></script>
 </html>
