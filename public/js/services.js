@@ -5,6 +5,13 @@ async function meow() {
 
 
 async function getServices() {
+
+    let status = await getMe();
+    if (status != 200) {
+        document.querySelector("#services").innerHTML = "You are not logged in!";
+        return;
+    }
+
     let services = await retrieveServices();
     const host_ol = "hostListingsOL";
     const client_ol = "clientListingsOL";

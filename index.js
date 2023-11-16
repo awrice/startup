@@ -200,8 +200,12 @@ apiRouter.get("/listingID/:listingId", async (req, res) => {
 
 apiRouter.post("/listing", upload.array('images'), async (req, res) => {
     console.log("POST /listing");
+
     let body = req.body;
     const user = await db.getMe(req.cookies['token']);
+    if (user == null) {
+        res.status(401).send({ msg: 'Unauthorized' });
+    }
     let listing = {
         "imgs": [],
         "title": body.title,

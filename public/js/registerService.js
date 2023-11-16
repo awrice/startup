@@ -36,3 +36,14 @@ async function registerClicked() {
     await registerServiceBackend(formData);
     return;
 }
+
+async function setup() {
+    let status = await getMe();
+    console.log(status);
+    if (status != 200) {
+        let form_elem = document.querySelector("#registerServiceForm");
+        form_elem.innerHTML = "You must login before you can register a serice";
+    }
+}
+
+setup();

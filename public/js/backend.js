@@ -18,6 +18,13 @@ async function createUser(username_, password_)  {
     return status;
 }
 
+async function getMe() {
+    let url = "/api/user/me";
+    let status = await fetch(url, { method: "get" })
+        .then((response) => response.status);
+    return status;
+}
+
 async function retrieveImage(imageId) {
     let url = "/api/img/" + imageId;
     let image = await fetch(url, { method: "GET" })

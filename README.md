@@ -69,3 +69,10 @@ For this deliverable, I added the following functionality:
 * **Stores data in MongoDB** - done!
 
 **NOTE**: There are some services that require the understanding of how to store user credentials that haven't been completed yet (things affiliated with the user)... I'll get those done in the Login Deliverable
+
+## Login Deliverable
+For this deliverable, I added this functionality
+* **User registration** - Creates a new account in the database.
+- **existing user** - You can log in again if you already have an account
+- **Use MongoDB to store credentials** - the listings are associated with the users that made them
+- **Restricts functionality** - You cannot create a listing until you have logged in.
