@@ -65,7 +65,7 @@ For this deliverable I added backend endpoints.
 ## DB Deliverable
 For this deliverable, I added the following functionality:
 * **MongoDB Atlas** - created, and the server can connect to it using the dbConfig.json file
-* **Endpoints for data** - the endpoints connect to the database appropriately and store/retrieve what they need
+* **Endpoints for data** - all non-user affiliated endpoints connect to the database appropriately and store/retrieve what they need. I added GET /img/:imageId and POST /img to retrieve images from the DB. GET /listing/:query also works correctly now.
 * **Stores data in MongoDB** - done!
 
 **NOTE**: There are some services that require the understanding of how to store user credentials that haven't been completed yet (things affiliated with the user)... I'll get those done in the Login Deliverable
