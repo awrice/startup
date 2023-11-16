@@ -170,7 +170,7 @@ apiRouter.post('/auth/login', async (req, res) => {
 
 apiRouter.get('/user/me', async (req, res) => {
     console.log('GET /user/me');
-    authToken = req.cookies['token'];
+    let authToken = req.cookies['token'];
     const user = await db.getMe(authToken);
     if (user) {
         res.send({ username: user.username });
@@ -218,12 +218,22 @@ apiRouter.post("/listing", upload.array('images'), async (req, res) => {
     res.json(listing_result);
 });
 
-apiRouter.get("/services", (_req, res) => {
+apiRouter.get("/services", async (req, res) => {
     console.log("GET /services");
-    let service_ids = DATABASE["services"];
-    let services = [];
-    for (id of service_ids) { services.push(DATABASE["listings"][id]); }
-    res.json(services);
+
+    let authToken = req.cookies['token'];
+    let host_service_ids = await db.retrieveHostServices(authToken);
+    let client_services_ids = await db.retrieveClientServices(authToken);
+
+    let host_services = []
+    let client_services = []
+    for (const listing_id of host_service_ids) {
+        host_services.push(await db.retrieveListing(listing_id));
+    }
+    for (const listing_id of client_services_ids) {
+        client_services.push(await db.retrieveListing(listing_id));
+    }
+    res.json({ host: host_services, client: client_services });
 });
 
 apiRouter.get("/messages/:otherid", (req, res) => {

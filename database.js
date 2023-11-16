@@ -50,6 +50,22 @@ async function updateUserHostService(authToken, listing_id) {
     return result;
 }
 
+async function updateUserClientService(authToken, listing_id) {
+
+}
+
+async function retrieveHostServices(authToken) {
+    const collection = db.collection(USER_COLL);
+    let result = await collection.findOne({ token: authToken });
+    if (result) { return result.services_as_host; }
+}
+
+async function retrieveClientServices(authToken) {
+    const collection = db.collection(USER_COLL);
+    let result = await collection.findOne({ token: authToken });
+    if (result) { return result.services_as_client; }
+}
+
 async function testConnection() {
     // Test that you can connect to the database
     (async function test() {
@@ -78,6 +94,15 @@ async function retrieveListings(searchQuery) {
     return result;
 }
 
+async function retrieveListing(listing_id) {
+    try {
+        let result = db.collection(LISTING_COLL).findOne({ _id: new ObjectId(listing_id) });
+        return result
+    } catch {
+        return null;
+    }
+}
+
 async function retrieveImage(imageId) {
     try {
         const res = await db.collection(IMAGES_COLL).findOne({ _id: new ObjectId(imageId) });
@@ -102,69 +127,6 @@ async function close() {
     await client.close();
 }
 
-async function test() {
-    const res = await db.collection('__tests__').findOne({ filename: './public/images/camry.png' });
-    // const res = await cursor.toArray();
-    console.log(res.filename);
-    const imageBinary = res.image
-    const imageBuffer = imageBinary ? imageBinary.buffer : null;
-    if (!imageBuffer) {
-        console.log("no image data found");
-        return false
-    }
-    // else { console.log('No image data found in the document.'); }
-    return imageBuffer
-}
-
-
-
-async function main() {
-    // Test that you can connect to the database
-    await testConnection();
-
-    // INSERT IMAGE
-    // const imageBuffer = fs.readFileSync('./public/images/camry.png');
-    // db.collection('__tests__').insertOne({
-    //     filename: './public/images/camry.png',
-    //     image: new Binary(imageBuffer)
-    // }, (insertErr, result) => {
-    //     if (insertErr) { console.error('Error inserting document:', insertErr); } 
-    //     else { console.log('Document inserted:', result.ops[0]); }
-    // });
-
-    // RETRIEVE IMAGE
-    console.log("Before...");
-    const res = await db.collection('__tests__').findOne({ filename: './public/images/camry.png' });
-    // const res = await cursor.toArray();
-    console.log(res.filename);
-    const imageBinary = res.image
-    const imageBuffer = imageBinary ? imageBinary.buffer : null;
-    if (imageBuffer) { fs.writeFileSync('/', imageBuffer); }
-    else { console.log('No image data found in the document.'); }
-    // , (findErr, document) => {
-    //     console.log("Coming...");
-    //     if (findErr) { console.error('Error finding document:', findErr); } 
-    //     else if (!document) { console.log('No document found.'); }
-    //     else {
-    //         // Get the Binary object from the document
-    //         const imageBinary = document.image;
-    //         console.log(`we got it: ${imageBinary.length}`);
-
-    //         // Convert the Binary object to a Buffer
-    //         const imageBuffer = imageBinary ? imageBinary.buffer : null;
-
-    //         if (imageBuffer) {
-    //             // Save the buffer to a file
-    //             fs.writeFileSync('./here', imageBuffer);
-    //             console.log('Image saved successfully.');
-    //         } else {
-    //             console.log('No image data found in the document.');
-    //         }
-    //     }
-    // });
-    await close();
-}
-
 // main()
 // console.log("done!");
 
@@ -174,11 +136,14 @@ module.exports = {
     createUser, 
     getMe,
     updateUserHostService,
+    updateUserClientService,
+    retrieveHostServices,
+    retrieveClientServices,
     testConnection, 
     insertListing, 
     retrieveListings,
+    retrieveListing,
     retrieveImage, 
     insertImage, 
-    test, 
     close 
 }
