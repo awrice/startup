@@ -38,9 +38,8 @@ async function registerClicked() {
 }
 
 async function setup() {
-    let status = await getMe();
-    console.log(status);
-    if (status != 200) {
+    let json_res = await getMe();
+    if (json_res.status != 200) {
         let form_elem = document.querySelector("#registerServiceForm");
         form_elem.innerHTML = "You must login before you can register a serice";
     }

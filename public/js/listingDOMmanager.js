@@ -41,5 +41,7 @@ function createListing(listing, listing_ol_id) {
             img_elem.src = `data:${image.mimetype};base64,${image.buffer}`;
         });
     }
+
+    return parent_li;
 }
 

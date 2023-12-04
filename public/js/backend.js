@@ -20,9 +20,19 @@ async function createUser(username_, password_)  {
 
 async function getMe() {
     let url = "/api/user/me";
-    let status = await fetch(url, { method: "get" })
-        .then((response) => response.status);
-    return status;
+    let json_res = await fetch(url, { method: "get" })
+        .then((response) => response.json());
+    console.log(json_res);
+    return json_res;
+}
+
+async function sendInterest(listing_id) {
+    let url = "/api/listing/interest/" + listing_id;
+    console.log(url);
+    let response = await fetch(url, { method: "GET" })
+        .then((response) => response.json());
+    console.log(response.status);
+    return response;
 }
 
 async function retrieveImage(imageId) {

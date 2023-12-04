@@ -140,6 +140,12 @@ p.message.me {
     align-self: flex-end;
 }
 
+#logindialog {
+    padding: 10pt;
+    color: red;
+}
+
+
 
 h1 {
     font-size: 24px;

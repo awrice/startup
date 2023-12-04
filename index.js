@@ -109,7 +109,7 @@ let DATABASE = {
     }
 }
 // --- //
-
+const { WebSocketServer } = require('ws');
 const express = require('express');
 const multer = require('multer');
 const cookieParser = require('cookie-parser');
@@ -138,6 +138,7 @@ const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 function setAuthCookie(res, authToken) {
+    console.log("\t> Setting Auth Cookie");
     res.cookie('token', authToken, {
         secure: true,
         httpOnly: true,
@@ -148,6 +149,9 @@ function setAuthCookie(res, authToken) {
 apiRouter.post('/auth/create', async (req, res) => {
     console.log('POST /auth/create');
     if (await db.getUser(req.body.username)) { res.status(409).send({ msg: 'Existing user' }); }
+    else if (req.body.username.trim().length == 0 || req.body.password.trim().length == 0) {
+        res.status(422).send({ msg: 'Username or password is empty' });
+    }
     else {
         const user = await db.createUser(req.body.username, req.body.password);
         setAuthCookie(res, user.token);
@@ -173,10 +177,10 @@ apiRouter.get('/user/me', async (req, res) => {
     let authToken = req.cookies['token'];
     const user = await db.getMe(authToken);
     if (user) {
-        res.send({ username: user.username });
+        res.status(200).send({ status: 200, username: user.username, userId: user._id });
         return;
     }
-    res.status(401).send({ msg: 'Unauthorized' });
+    res.status(401).send({ status: 401, msg: 'Unauthorized' });
 });
 
 apiRouter.get("/listing/:query", async (req, res) => {
@@ -190,13 +194,24 @@ apiRouter.get("/listing/:query", async (req, res) => {
     res.json(filtered_listings);
 });
 
+apiRouter.get("/listing/interest/:listingId", async (req, res) => {
+    let listing_id = req.params.listingId;
+    console.log("GET /listing/interest/" + listing_id);
+    let authToken = req.cookies['token'];
+    let result = await db.updateUserClientService(authToken, listing_id);
+    if (result == null) {
+        res.json({"status": 401});
+    } else {
+        res.json({"status": 200});
+    }
+});
+
 apiRouter.get("/listingID/:listingId", async (req, res) => {
     console.log("GET /listingID/" + req.params.listingId);
 
     let result = await db.retrieveListing(req.params.listingId);
-    console.log(result);
     res.json(result);
-})
+});
 
 apiRouter.post("/listing", upload.array('images'), async (req, res) => {
     console.log("POST /listing");
@@ -256,6 +271,7 @@ apiRouter.get("/messages/:otherid", (req, res) => {
 });
 
 apiRouter.get("/img/:imageId", (req, res) => {
+    console.log("GET /img/" + req.params.imageId);
     db.retrieveImage(req.params.imageId)
     .then((image) => {
         if (image == null) {
@@ -288,7 +304,83 @@ app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
 });
 
-app.listen(port, () => {
+let server = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
+});
+
+
+
+// WEB SOCKETS //
+// Create a websocket object
+const wss = new WebSocketServer({ noServer: true });
+
+// Handle the protocol upgrade from HTTP to WebSocket
+server.on('upgrade', (request, socket, head) => {
+    
+    wss.handleUpgrade(request, socket, head, function done(ws) {
+        wss.emit('connection', ws, request);
+    });
+});
+
+// Keep track of all the connections
+let connections = {};
+
+function addConnection(token_val, listingId, ws) {
+    const connection = { alive: true, ws: ws }
+    if (!(listingId in connections)) {
+        connections[listingId] = { online: {} }
+    } else if (token_val in connections[listingId]) {
+        return false;
+    }
+    connections[listingId]['online'][token_val] = connection;
+    return true;
+}
+
+function removeConnection(token_val, listingId) {
+    delete connections[listingId]['online'][token_val];
+    // connections[listingId]['online'] = connections[listingId]['online'].filter((x) => x['token'] !== token_val );
+}
+
+wss.on('connection', (ws, req) => {
+    const cookies = req.headers.cookie.split('; ').reduce((acc, cookie) => {
+        const [name, value] = cookie.split('=');
+        acc[name] = value;
+        return acc;
+    }, {});
+    const token_val = cookies.token;
+    const urlParams = new URLSearchParams(req.url.split('?')[1]);
+    let listingId = urlParams.get('listingId');
+
+    // set the connection element as accessible by the listingId
+    let success = addConnection(token_val, listingId, ws);
+    if (success == false) {
+        // Connection should be refused... this guy is already messaging somewhere else
+        ws.terminate();
+    }
+
+    console.log(`CONNECTED ${token_val}`);
+    // console.log(connections[listingId]);
+    // ws.send('{"msg": "hello!", "sender": "SERVER"}');
+
+    ws.on('message', (data) => {
+        console.log("MESSAGE");
+        console.log(data);
+        let users = connections[listingId]['online']
+        for (const [connected_token, dict] of Object.entries(users)) {
+            if (connected_token !== token_val) {
+                users[connected_token].ws.send(data);
+            }
+        }
+    });
+
+    ws.on('close', () => {
+        console.log("CLOSE");
+        removeConnection(token_val, listingId);
+    })
+
+    ws.on('pong', () => {
+        console.log("PONG");
+        // connection.alive = true;
+    });
 });
 

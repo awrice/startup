@@ -5,9 +5,8 @@ async function meow() {
 
 
 async function getServices() {
-
-    let status = await getMe();
-    if (status != 200) {
+    let json_res = await getMe();
+    if (json_res.status != 200) {
         document.querySelector("#services").innerHTML = "You are not logged in!";
         return;
     }
@@ -20,13 +19,19 @@ async function getServices() {
         document.querySelector(`#${host_ol}`).innerHTML = "none"
     }
     for (const listing of services.host) {
-        createListing(listing, host_ol);
+        let elem = createListing(listing, host_ol);
+        elem.onclick = () => {
+            window.location = `/messaging.html?listingId=${listing['_id']}`;
+        }
     }
     if (services.client.length == 0) {
         document.querySelector(`#${client_ol}`).innerHTML = "none"
     }
     for (const listing of services.client) {
-        createListing(listing, client_ol);
+        let elem = createListing(listing, client_ol);
+        elem.onclick = () => {
+            window.location = `/messaging.html?listingId=${listing['_id']}&role=client`;
+        }
     }
 }
 

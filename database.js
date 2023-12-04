@@ -42,6 +42,9 @@ async function getMe(authToken) {
 }
 
 async function updateUserHostService(authToken, listing_id) {
+    if (await retrieveListing(listing_id) == null) {
+        return null;
+    }
     const collection = db.collection(USER_COLL);
     let result = await collection.updateOne(
         { token: authToken }, 
@@ -51,6 +54,15 @@ async function updateUserHostService(authToken, listing_id) {
 }
 
 async function updateUserClientService(authToken, listing_id) {
+    if (await retrieveListing(listing_id) == null) {
+        return null;
+    }
+    const collection = db.collection(USER_COLL);
+    let result = await collection.updateOne(
+        { token: authToken }, 
+        { $push: { services_as_client: listing_id } }
+    );
+    return result;
 
 }
 
