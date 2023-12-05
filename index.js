@@ -316,7 +316,6 @@ const wss = new WebSocketServer({ noServer: true });
 
 // Handle the protocol upgrade from HTTP to WebSocket
 server.on('upgrade', (request, socket, head) => {
-    
     wss.handleUpgrade(request, socket, head, function done(ws) {
         wss.emit('connection', ws, request);
     });
@@ -325,8 +324,9 @@ server.on('upgrade', (request, socket, head) => {
 // Keep track of all the connections
 let connections = {};
 
-function addConnection(token_val, listingId, ws) {
-    const connection = { alive: true, ws: ws }
+async function addConnection(token_val, listingId, ws) {
+    const user = await db.getMe(token_val);
+    const connection = { name: user.username, userId: user._id, alive: true, ws: ws }
     if (!(listingId in connections)) {
         connections[listingId] = { online: {} }
     } else if (token_val in connections[listingId]) {
@@ -363,12 +363,16 @@ wss.on('connection', (ws, req) => {
     // ws.send('{"msg": "hello!", "sender": "SERVER"}');
 
     ws.on('message', (data) => {
-        console.log("MESSAGE");
+        console.log(`MESSAGE from ${token_val}`);
+        let users = connections[listingId]['online'];
+        data = JSON.parse(data)
+        data.username = users[token_val]['name'];
+        db.addMessage(listingId, data).then(() => { console.log("Done!"); });
         console.log(data);
-        let users = connections[listingId]['online']
-        for (const [connected_token, dict] of Object.entries(users)) {
+
+        for (const [connected_token, conn_data] of Object.entries(users)) {
             if (connected_token !== token_val) {
-                users[connected_token].ws.send(data);
+                conn_data.ws.send(JSON.stringify(data));
             }
         }
     });
@@ -376,7 +380,7 @@ wss.on('connection', (ws, req) => {
     ws.on('close', () => {
         console.log("CLOSE");
         removeConnection(token_val, listingId);
-    })
+    });
 
     ws.on('pong', () => {
         console.log("PONG");

@@ -135,6 +135,20 @@ async function insertImage(image) {
     }
 }
 
+async function addMessage(listing_id, data) {
+    if (await retrieveListing(listing_id) == null) {
+        return null;
+    }
+    const collection = db.collection(MESSAGE_COLL);
+    let result = await collection.updateOne(
+        { listing_id: listing_id }, 
+        { $push: { messages: data } },
+        { upsert: true }
+    );
+    return result;
+
+}
+
 async function close() {
     await client.close();
 }
@@ -157,5 +171,6 @@ module.exports = {
     retrieveListing,
     retrieveImage, 
     insertImage, 
+    addMessage,
     close 
 }

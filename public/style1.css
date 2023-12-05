@@ -103,7 +103,6 @@ form {
 form.fullwidth > ul {
     display: flex;
     flex-direction: column;
-
 }
 ul li {
     margin-bottom: 15px;
@@ -127,12 +126,19 @@ div#messagesDiv {
     flex-direction: column;
     margin: 10pt;
 }
+p.messageUsername {
+    font-size: 10pt;
+    color: grey;
+    padding: 0;
+    margin: 0;
+}
 p.message {
     width: 40vw;
     padding: 10pt;
     background-color: #eee;
     margin: 10pt;
     border-radius: 5pt;
+    margin: 0;
 }
 p.message.me {
     background-color: #3355ff;

@@ -6,15 +6,26 @@ async function getMessages() {
     return messages;
 }
 
-function createMessage(message) {
+function createMessage(message, sender) {
     const message_div = document.querySelector("#messagesDiv");
-    const p_elem = document.createElement("p");
-    message_div.appendChild(p_elem);
+    const msg_elem = document.createElement("p");
+    const name_elem = document.createElement("p");
+    message_div.appendChild(msg_elem);
+    
 
-    p_elem.innerHTML = message["message"];
-    p_elem.classList.add("message");
-    if (message["sender"] == -1) { p_elem.classList.add("me"); }
-    else { p_elem.classList.add("them"); }
+    msg_elem.innerHTML = message;
+    name_elem.innerHTML = sender;
+    msg_elem.classList.add("message");
+    name_elem.classList.add("messageUsername");
+    if (sender == -1) { msg_elem.classList.add("me"); }
+    else { 
+        message_div.appendChild(name_elem);
+        msg_elem.classList.add("them");
+    }
+}
+
+function appendMessage(message, username) {
+    createMessage(message, username);
 }
 
 function sendMessage(socket) {
@@ -46,9 +57,11 @@ async function setupPage() {
 
     // Display messages we receive from our friends
     socket.onmessage = async (event) => {
-        // const text = await event.data;
+        // const text = await event.data.text();
         console.log("ONMESSAGE");
-        console.log(JSON.parse(event.data));
+        let data = JSON.parse(event.data);
+        appendMessage(data['msg'], data['username']);
+        // console.log(JSON.parse(text));
         // const chat = JSON.parse(text);
         // appendMsg('friend', chat.name, chat.msg);
     };
@@ -63,9 +76,11 @@ async function setupPage() {
     };
 
     const input = document.querySelector('#messageField');
-        input.addEventListener('keydown', (e) => {
+    input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             sendMessage(socket);
+            createMessage(input.value, -1);
+            input.value = '';
         }
     });
 }
