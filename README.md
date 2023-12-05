@@ -73,6 +73,13 @@ For this deliverable, I added the following functionality:
 ## Login Deliverable
 For this deliverable, I added this functionality
 * **User registration** - Creates a new account in the database.
-- **existing user** - You can log in again if you already have an account
-- **Use MongoDB to store credentials** - the listings are associated with the users that made them
-- **Restricts functionality** - You cannot create a listing until you have logged in.
+* **existing user** - You can log in again if you already have an account
+* **Use MongoDB to store credentials** - the listings are associated with the users that made them
+* **Restricts functionality** - You cannot create a listing until you have logged in.
+
+## Web Sockets Deliverable
+For this deliverable I used webSocket to update the votes on the frontend in realtime.
+* **Backend listens for WebSocket connection** - done!
+* **Frontend makes WebSocket connection** - done!
+* **Data sent over WebSocket connection** - done!
+* **WebSocket data displayed** - All the messages from their peers are displayed on the client side
