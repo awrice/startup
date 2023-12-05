@@ -359,6 +359,17 @@ wss.on('connection', (ws, req) => {
     }
 
     console.log(`CONNECTED ${token_val}`);
+    // send the previous messages to the user 
+    db.retrieveMessages(listingId).then((res) => {
+        let to_send = null
+        if (res != null) {
+            to_send = { init: true, messages: res.messages };
+        } else {
+            to_send = { init: true, messages: [] };
+        }
+        ws.send(JSON.stringify(to_send));
+    });
+
     // console.log(connections[listingId]);
     // ws.send('{"msg": "hello!", "sender": "SERVER"}');
 
@@ -367,7 +378,8 @@ wss.on('connection', (ws, req) => {
         let users = connections[listingId]['online'];
         data = JSON.parse(data)
         data.username = users[token_val]['name'];
-        db.addMessage(listingId, data).then(() => { console.log("Done!"); });
+        data.user_id = users[token_val]['userId'];
+        db.addMessage(listingId, data);
         console.log(data);
 
         for (const [connected_token, conn_data] of Object.entries(users)) {

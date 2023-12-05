@@ -146,6 +146,15 @@ async function addMessage(listing_id, data) {
         { upsert: true }
     );
     return result;
+}
+
+async function retrieveMessages(listing_id) {
+    try {
+        let result = db.collection(MESSAGE_COLL).findOne({ listing_id: listing_id });
+        return result
+    } catch {
+        return null;
+    }
 
 }
 
@@ -172,5 +181,6 @@ module.exports = {
     retrieveImage, 
     insertImage, 
     addMessage,
+    retrieveMessages,
     close 
 }

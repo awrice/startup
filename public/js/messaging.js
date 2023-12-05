@@ -11,17 +11,20 @@ function createMessage(message, sender) {
     const msg_elem = document.createElement("p");
     const name_elem = document.createElement("p");
     message_div.appendChild(msg_elem);
-    
 
     msg_elem.innerHTML = message;
     name_elem.innerHTML = sender;
     msg_elem.classList.add("message");
     name_elem.classList.add("messageUsername");
-    if (sender == -1) { msg_elem.classList.add("me"); }
+    if (sender == -1) {
+        name_elem.innerHTML = "you";
+        msg_elem.classList.add("me");
+        name_elem.classList.add("me");
+    }
     else { 
-        message_div.appendChild(name_elem);
         msg_elem.classList.add("them");
     }
+    message_div.appendChild(name_elem);
 }
 
 function appendMessage(message, username) {
@@ -33,6 +36,17 @@ function sendMessage(socket) {
     const msg = msgEl.value;
     console.log(msg);
     socket.send(`{"msg":"${msg}"}`);
+}
+
+async function initialize(init_package) {
+    let my_info = await getMe();
+    for (const message of init_package.messages) {
+        if (message.user_id === my_info.userId) {
+            createMessage(message.msg, -1);
+        } else {
+            createMessage(message.msg, message.username);
+        }
+    }
 }
 
 async function setupPage() {
@@ -60,7 +74,11 @@ async function setupPage() {
         // const text = await event.data.text();
         console.log("ONMESSAGE");
         let data = JSON.parse(event.data);
-        appendMessage(data['msg'], data['username']);
+        if ('init' in data && data.init == true) {
+            initialize(data);
+        } else {
+            appendMessage(data['msg'], data['username']);
+        }
         // console.log(JSON.parse(text));
         // const chat = JSON.parse(text);
         // appendMsg('friend', chat.name, chat.msg);
