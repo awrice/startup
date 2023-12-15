@@ -18,21 +18,14 @@ export function Messaging({ authState }) {
   }, [messages])
 
   useEffect(() => {
-    let new_sock_str = `${protocol}://${window.location.host}/ws?listingId=${listingId}`
-    if (socket_str !== new_sock_str) {
-      if (socket !== null) { socket.close(); }
-      socket_str = new_sock_str;
-    } else if (socket !== null) {
-      return;
-    }
+    if (socket !== null) { return; }
 
-    socket = new WebSocket(socket_str);
+    socket = new WebSocket(`${protocol}://${window.location.host}/ws?listingId=${listingId}`);
     socket.sendMessage = (msg_text) => {
       console.log(messages);
       console.log(msg_text);
       let message_obj = {'msg': msg_text, 'username' : localStorage.getItem('userName')}
       socket.send(`{"msg":"${msg_text}"}`)
-      console.log([...messages, message_obj]);
 
       setMessages(prevMessages => [...prevMessages, message_obj]);
     }
@@ -61,18 +54,13 @@ export function Messaging({ authState }) {
       console.log("ONCLOSE");
     };
 
-    // const cleanup = () => {
-    //   console.log('YUH');
-    //   if (socket) { socket.close(); }
-    // }
-    // window.addEventListener('beforeunload', cleanup);
-    // return () => {
-    //   console.log('YUH');
-    //   if (socket) { socket.close(); }
-    // };
-
-    // window.addEventListener('beforeunload', cleanup);
-  })
+    return () => {
+      if (socket !== null) {
+        socket.close();
+        socket = null;
+      }
+    }
+  }, [])
 
   return (
     <div id="allMessages">
