@@ -1,0 +1,35 @@
+div#allMessages {
+    display: flex;
+    flex-direction: column;
+    margin: 10pt;
+}
+div.messageDiv {
+    display: flex;
+    flex-direction: column;
+}
+div.messageDiv.me {
+    align-self: flex-end;
+}
+p.messageUsername {
+    font-size: 10pt;
+    color: grey;
+    padding: 0;
+    margin: 0;
+}
+p.messageUsername.me {
+    align-self: flex-end;
+}
+p.message {
+    width: 40vw;
+    padding: 10pt;
+    background-color: #eee;
+    margin: 10pt;
+    border-radius: 5pt;
+    margin: 0;
+}
+p.message.me {
+    background-color: #3355ff;
+    color: white;
+    align-self: flex-end;
+}
+

@@ -1,0 +1,36 @@
+/* REGISTER */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+form.fullwidth > ul {
+    display: flex;
+    flex-direction: column;
+}
+ul li {
+    margin-bottom: 15px;
+}
+label {
+    font-weight: bold;
+    display: block;
+    margin: 10pt 0;
+}
+textarea {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none;
+    font-family: Arial, Sans-serif;
+    height: 300pt;
+}
+
+div.dialog {
+    margin: 10pt;
+    padding: 10pt;
+    background-color: mediumseagreen;
+    color: white;
+    border-radius: 3pt;
+}

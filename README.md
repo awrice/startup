@@ -83,3 +83,10 @@ For this deliverable I used webSocket to update the votes on the frontend in rea
 * **Frontend makes WebSocket connection** - done!
 * **Data sent over WebSocket connection** - done!
 * **WebSocket data displayed** - All the messages from their peers are displayed on the client side
+
+## React deliverable
+For this deliverable I converted the application over to use React.
+* **Bundled and transpiled** - done!
+* **Components** - Everything in the site is now a React Component
+* **Router** - All the tabs on the app correctly route using the React Router
+* **Hooks** - All the dynamic parts of the site use hooks

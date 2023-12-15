@@ -1,0 +1,40 @@
+div.welcome-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+div.welcome-screen > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type=text], input[type=password], input[type=tel] {
+    padding: 10pt;
+    margin: 10pt;
+    border-radius: 3pt;
+    border: 1pt solid #ddd;
+    width: 200pt;
+}
+input[type="search"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 3pt;
+    border: 1pt solid #ddd;
+}
+button {
+    border: none;
+    padding: 10pt;
+    border-radius: 100pt;
+    transition: 0.25s;
+    /* width: 100pt; */
+    margin-top: 10pt;
+}
+button:hover {
+    background-color: #3355ff;
+    color: white;
+}
+
+
